@@ -1,18 +1,15 @@
 #!/bin/bash
 
-WALLDIR="$HOME/Pictures/wallpapers"
+WALLDIR="$HOME/Pictures/wallpaper"
 
 WALL=$(find "$WALLDIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | shuf -n 1)
 
-# save current wallpaper for lockscreen sync
+[ -z "$WALL" ] && exit 1
+
+mkdir -p ~/.cache/hypr
 echo "$WALL" > ~/.cache/hypr/current_wallpaper
 
-# restart hyprpaper cleanly
-pkill hyprpaper
-hyprpaper &
-
-sleep 0.3
-
-# apply wallpaper
+hyprctl hyprpaper unload all
 hyprctl hyprpaper preload "$WALL"
-hyprctl hyprpaper wallpaper ",$WALL"
+hyprctl hyprpaper wallpaper "DP-1,$WALL"
+hyprctl hyprpaper wallpaper "HDMI-A-1,$WALL"
