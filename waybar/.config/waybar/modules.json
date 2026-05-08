@@ -1,0 +1,29 @@
+{
+	// Workspaces
+	"hyprland/workspaces" : {
+		"on-click": "activate",
+		"active-only": false, 
+			"all-outputs": true
+	},
+
+	// Rofi Application Launcher
+	"custom/appmenu": {
+		"format": "Apps",
+		"on-click": "rofi -show drun",
+		"tooltip": false
+	},
+
+	//Sysinfo w/ hover
+	"custom/sysinfo": {
+  		"exec": "~/.config/waybar/scripts/sysinfo.sh",
+  		"interval": 2,
+  		"return-type": "json",
+  		"format": "{}",
+  		"tooltip": true
+	},
+
+	// System Tray
+	"tray": {
+		"spacing": 10
+	}
+}
