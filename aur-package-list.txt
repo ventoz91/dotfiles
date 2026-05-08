@@ -1,0 +1,5 @@
+python-imageio-ffmpeg 0.6.0-2
+python-screeninfo 0.8.1-2
+redhat-fonts 4.1.0-2
+sddm-silent-theme 1.4.2-1
+waypaper 2.8-1
