@@ -20,15 +20,16 @@
 //        "idle_inhibitor",
         "pulseaudio",
 //        "network",
-        "power-profiles-daemon",
-        "cpu",
+//        "power-profiles-daemon",
+//        "cpu",
         "memory",
-        "temperature",
+//        "temperature",
 //        "backlight",
 //        "keyboard-state",
 //     	  "hyprland/language",
 //        "battery",
 //        "battery#bat2",
+	"network",
         "clock",
         "custom/power"
     ],
@@ -94,7 +95,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -103,7 +104,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",

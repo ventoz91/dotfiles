@@ -15,7 +15,7 @@
 
 	//Sysinfo w/ hover
 	"custom/sysinfo": {
-  		"exec": "~/.config/waybar/scripts/sysinfo.sh",
+  		"exec": "~/.config/waybar/sysinfo.sh",
   		"interval": 2,
   		"return-type": "json",
   		"format": "{}",
