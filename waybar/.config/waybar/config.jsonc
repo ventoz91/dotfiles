@@ -31,6 +31,7 @@
 //        "battery",
 //        "battery#bat2",
 	"network",
+	"custom/updates",
         "clock",
         "custom/power"
     ],

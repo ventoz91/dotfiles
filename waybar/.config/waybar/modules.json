@@ -25,5 +25,15 @@
 	// System Tray
 	"tray": {
 		"spacing": 10
+	},
+
+	// Package updates
+	"custom/updates": {
+		"exec": "~/.config/waybar/updates.sh",
+		"interval": 3600,
+		"return-type": "json",
+		"format": "{}",
+		"tooltip": true,
+		"on-click": "kitty -e bash -c 'sudo pacman -Syu; read -p \"Press enter to close\"'"
 	}
 }
