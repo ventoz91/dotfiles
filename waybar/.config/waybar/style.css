@@ -40,6 +40,7 @@ button {
 #workspaces,
 #custom-sysinfo,
 #custom-appmenu,
+#custom-updates,
 #custom-power {
     background-color: rgba(20, 20, 20, 0.55);
     border-radius: 20px;
@@ -98,6 +99,10 @@ button {
 #mpd.disconnected,
 #mpd.stopped {
     color: #90b1b1;
+}
+
+#custom-updates.urgent {
+    color: #f53c3c;
 }
 
 #tray > .passive {

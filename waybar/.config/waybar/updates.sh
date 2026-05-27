@@ -41,5 +41,6 @@ fi
 
 text_json=$(json_encode "󰚰 ${total}")
 tooltip_json=$(json_encode "$tooltip")
+class=$( [ "$total" -gt 100 ] && echo "urgent" || echo "has-updates" )
 
-echo "{\"text\": ${text_json}, \"tooltip\": ${tooltip_json}, \"class\": \"has-updates\"}"
+echo "{\"text\": ${text_json}, \"tooltip\": ${tooltip_json}, \"class\": \"${class}\"}"
