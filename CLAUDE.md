@@ -15,6 +15,7 @@ stow waybar
 stow kitty
 stow fastfetch
 stow scripts
+stow rofi
 
 # Remove symlinks
 stow -D hypr
@@ -47,6 +48,9 @@ Key keybinds (`$mainMod` = Super):
 - `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
 - `style.css` — bar appearance
 - `power_menu.xml` — GTK menu for the power button widget (shutdown, reboot, lock)
+
+### Rofi (`rofi/`)
+- `config.rasi` — dark semi-transparent theme matching waybar; modes: drun (app launcher) + run (command); font: JetBrainsMono Nerd Font Propo Bold 13
 
 ### Scripts (`scripts/`)
 - `screenshot.sh` — interactive region screenshot using `grim` + `slurp`; saves to `~/Pictures/Screenshots/` and copies to clipboard via `wl-copy`
