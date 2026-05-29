@@ -76,13 +76,13 @@ Key keybinds (`$mainMod` = Super):
 - `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor with `cursor_trail 1`, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
-- `config.jsonc` — bar layout (height 34, font 14px); includes `modules.json` for shared module definitions
-- `modules.json` — defines `hyprland/workspaces` (Nerd Font icons per workspace), `hyprland/window` (active window title, cyan pill), `custom/appmenu`, `custom/sysinfo`, and `tray`
-- `sysinfo.sh` — outputs JSON for the `custom/sysinfo` module (CPU%, RAM via `/proc/stat` + `free`)
+- `config.jsonc` — bar layout (height 34, font 14px); includes `modules.json` for shared module definitions; clock shows `Mon 29  14:32`; pulseaudio scroll-wheel volume control
+- `modules.json` — defines `hyprland/workspaces` (numbered), `hyprland/window` (active window title, cyan pill, hides when empty), `custom/appmenu`, `custom/sysinfo` (click → btop), and `tray`
+- `sysinfo.sh` — outputs JSON for the `custom/sysinfo` module (CPU%, RAM via `/proc/stat` + `free`); click opens btop
 - `updates.sh` — outputs pending pacman + AUR update count for a waybar module
 - `weather.sh` — outputs current weather via wttr.in for a waybar module
 - `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
-- `style.css` — bar appearance; `#window` pill styled cyan italic
+- `style.css` — bar appearance; active workspace cyan solid pill; urgent workspace pulses red; power button red on hover; `#window` pill hides when empty
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
 
 ### Waypaper (`waypaper/`)

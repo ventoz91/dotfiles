@@ -86,9 +86,7 @@
   - Shows artist + title + album art (if available via `playerctl metadata mpris:artUrl`)
   - Add to autostart in `hyprland.conf`; stack tag so it never spams
 
-- [ ] **Sysinfo click → btop** — no install required (once btop is installed)
-  - Add `"on-click": "kitty -e btop"` to `custom/sysinfo` in `modules.json`
-  - One line change
+- [x] **Sysinfo click → btop** — `on-click` added to `custom/sysinfo` in `modules.json`
 
 - [ ] **Picture-in-picture keybind** — no install required
   - `Super+P` floats the focused window, resizes to ~30% width, moves to bottom-right corner, pins across all workspaces

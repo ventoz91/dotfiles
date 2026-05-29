@@ -20,6 +20,7 @@ bind
 bluez
 bluez-utils
 breeze
+btop
 btrfs-assistant
 btrfs-progs
 cantarell-fonts
@@ -74,7 +75,6 @@ gst-plugins-bad
 gst-plugins-ugly
 haveged
 hdparm
-htop
 hwdetect
 hwinfo
 hypridle
