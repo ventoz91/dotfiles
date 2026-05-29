@@ -51,7 +51,7 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 ### Hyprland (`hypr/`)
 - `hyprland.conf` — main config; sources `conf/monitors.conf` for display layout
 - `conf/monitors.conf` — dual monitor: DP-1 (3440×1440@100, primary ultrawide) + HDMI-A-1 (1920×1080@60, right of primary)
-- `random-wallpaper.sh` — picks a random image from `~/Pictures/wallpaper/` and sets it on both monitors via `hyprctl hyprpaper`
+- `random-wallpaper.sh` — daemon loop: picks a random image from `~/Pictures/wallpaper/`, applies it via `swww img` with a grow transition, then sleeps 30 minutes and repeats; waits for `swww-daemon` on startup
 - `startup-apps.sh` — staggered workspace layout on login: disables `follow_mouse`, switches to each workspace and launches its app, re-enables `follow_mouse` after all windows appear. Order: Firefox ws1 → Firefox ws2 → kitty bot ws5 → Discord ws3 (last, slowest)
 - `hypridle.conf` — locks session after 900s idle via `loginctl lock-session`
 - `hyprlock.conf` / `hyprpaper.conf` — lock screen and wallpaper daemon config

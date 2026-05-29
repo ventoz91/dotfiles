@@ -1,15 +1,23 @@
 #!/bin/bash
-
 WALLDIR="$HOME/Pictures/wallpaper"
+INTERVAL=1800  # 30 minutes
 
-WALL=$(find "$WALLDIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | shuf -n 1)
+# Wait for swww daemon to be ready
+until swww query &>/dev/null; do sleep 0.5; done
 
-[ -z "$WALL" ] && exit 1
+while true; do
+    WALL=$(find "$WALLDIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | shuf -n 1)
 
-mkdir -p ~/.cache/hypr
-echo "$WALL" > ~/.cache/hypr/current_wallpaper
+    if [ -n "$WALL" ]; then
+        mkdir -p ~/.cache/hypr
+        echo "$WALL" > ~/.cache/hypr/current_wallpaper
 
-hyprctl hyprpaper unload all
-hyprctl hyprpaper preload "$WALL"
-hyprctl hyprpaper wallpaper "DP-1,$WALL"
-hyprctl hyprpaper wallpaper "HDMI-A-1,$WALL"
+        swww img "$WALL" \
+            --transition-type grow \
+            --transition-pos center \
+            --transition-duration 1.5 \
+            --transition-fps 60
+    fi
+
+    sleep "$INTERVAL"
+done
