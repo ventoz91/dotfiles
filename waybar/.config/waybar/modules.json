@@ -4,15 +4,7 @@
 		"on-click": "activate",
 		"active-only": false,
 		"all-outputs": true,
-		"format": "{icon}",
-		"format-icons": {
-			"1": "󰈹",
-			"2": "󰈹",
-			"3": "󰙯",
-			"4": "",
-			"5": "",
-			"default": ""
-		}
+		"format": "{name}"
 	},
 
 	// Active window title
@@ -33,13 +25,14 @@
 		"tooltip": false
 	},
 
-	//Sysinfo w/ hover
+	//Sysinfo w/ hover — click to open btop
 	"custom/sysinfo": {
   		"exec": "~/.config/waybar/sysinfo.sh",
   		"interval": 2,
   		"return-type": "json",
   		"format": "{}",
-  		"tooltip": true
+  		"tooltip": true,
+  		"on-click": "kitty -e btop"
 	},
 
 	// System Tray
