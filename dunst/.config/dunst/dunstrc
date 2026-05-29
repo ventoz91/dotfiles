@@ -80,8 +80,3 @@
     frame_color = "#f38ba8"
     timeout = 0
     default_icon = dialog-error
-
-[discord]
-    appname = Discord
-    stack_tag = discord
-    timeout = 6
