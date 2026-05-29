@@ -15,16 +15,16 @@ hyprctl dispatch workspace 2
 hyprctl dispatch exec "firefox --new-window"
 sleep 2
 
-# ws3 (HDMI-A-1): Discord
-hyprctl dispatch workspace 3
-hyprctl dispatch exec discord
-sleep 1
-
-# ws5 (DP-1): Discord bot terminal
+# ws5 (HDMI-A-1): Discord bot terminal
 hyprctl dispatch workspace 5
 hyprctl dispatch exec "kitty -e $HOME/.config/scripts/discord-bot.sh"
+sleep 1
 
-# Give the last batch of windows time to appear, return to ws1, restore
-sleep 5
+# ws3 (HDMI-A-1): Discord last — it's the slowest to start
+hyprctl dispatch workspace 3
+hyprctl dispatch exec discord
+
+# Wait for Discord to appear, return to ws1, restore follow_mouse
+sleep 8
 hyprctl dispatch workspace 1
 hyprctl keyword input:follow_mouse 1
