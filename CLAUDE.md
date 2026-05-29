@@ -12,7 +12,7 @@ Arch Linux dotfiles managed with GNU Stow. Each top-level directory is a stow pa
 
 ```bash
 # From ~/dotfiles, symlink a package into $HOME
-stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper
 
 # Remove symlinks
 stow -D hypr
@@ -84,6 +84,9 @@ Key keybinds (`$mainMod` = Super):
 - `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
 - `style.css` — bar appearance; `#window` pill styled cyan italic
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
+
+### Waypaper (`waypaper/`)
+- `config.ini` — wallpaper picker config; backend set to `swww`, grow transition at 1.5s/60fps; bound to `Super+W`
 
 ### Rofi (`rofi/`)
 - `config.rasi` — dark semi-transparent theme matching waybar; modes: drun (app launcher) + run (command); font: JetBrainsMono Nerd Font Propo Bold 13
