@@ -9,6 +9,8 @@ Arch Linux + Hyprland desktop configuration managed with [GNU Stow](https://www.
 | Window Manager    | Hyprland                     |
 | Status Bar        | Waybar                       |
 | Terminal          | Kitty                        |
+| Shell             | Bash                         |
+| Shell Prompt      | oh-my-posh                   |
 | App Launcher      | Rofi                         |
 | Notifications     | Dunst                        |
 | Lock Screen       | Hyprlock                     |
@@ -30,11 +32,11 @@ Install all packages from the included lists:
 # Official repos
 sudo pacman -S --needed - < package-list.txt
 
-# AUR (requires paru)
-paru -S --needed - < aur-package-list.txt
+# AUR (requires yay)
+yay -S --needed - < aur-package-list.txt
 
 # Extra tools used by these configs
-paru -S wlogout hyprsunset
+yay -S wlogout hyprsunset oh-my-posh
 ```
 
 ## Install
@@ -42,7 +44,7 @@ paru -S wlogout hyprsunset
 ```bash
 git clone https://github.com/ventoz91/dotfiles ~/dotfiles
 cd ~/dotfiles
-stow hypr waybar rofi kitty nvim dunst wlogout scripts fastfetch
+stow hypr waybar rofi kitty nvim dunst wlogout scripts fastfetch bash ohmyposh
 ```
 
 To remove a package's symlinks:
@@ -127,39 +129,50 @@ Workspaces 1–5 are pinned with `workspace = <id>, monitor:<mon>, persistent:tr
 
 ## Structure
 
-Each top-level directory is a stow package whose internal path mirrors `~/.config/`:
+`bash/` and `ohmyposh/` link into `$HOME` directly; all others link into `~/.config/`.
 
 ```
 dotfiles/
-├── hypr/           # Hyprland WM config
+├── bash/               # Shell config
+│   └── .bashrc
+├── hypr/               # Hyprland WM config
 │   └── .config/hypr/
 │       ├── hyprland.conf
 │       ├── hypridle.conf
 │       ├── hyprlock.conf
 │       ├── hyprpaper.conf
 │       ├── random-wallpaper.sh
+│       ├── startup-apps.sh
 │       └── conf/monitors.conf
-├── waybar/         # Status bar
+├── waybar/             # Status bar
 │   └── .config/waybar/
 │       ├── config.jsonc
 │       ├── modules.json
 │       ├── style.css
-│       ├── sysinfo.sh
-│       ├── updates.sh
-│       └── startup.sh
-├── kitty/          # Terminal emulator
+│       ├── sysinfo.sh      # CPU/RAM stats for waybar module
+│       ├── updates.sh      # Pending pacman/AUR update count
+│       ├── weather.sh      # Current weather via wttr.in
+│       └── startup.sh      # Kill + restart waybar
+├── kitty/              # Terminal emulator
 │   └── .config/kitty/kitty.conf
-├── rofi/           # App launcher
+├── ohmyposh/           # Shell prompt
+│   └── .config/ohmyposh/config.toml
+├── rofi/               # App launcher
 │   └── .config/rofi/config.rasi
-├── dunst/          # Notifications
+├── dunst/              # Notifications
 │   └── .config/dunst/dunstrc
-├── wlogout/        # Power menu
+├── wlogout/            # Power menu
 │   └── .config/wlogout/
 │       ├── layout
 │       └── style.css
-├── scripts/        # Utility scripts
-│   └── .config/scripts/screenshot.sh
-└── fastfetch/      # System info
+├── nvim/               # Text editor
+│   └── .config/nvim/init.lua
+├── scripts/            # Utility scripts
+│   └── .config/scripts/
+│       ├── screenshot.sh       # Region / fullscreen / window screenshot picker
+│       ├── scratchpad.sh       # Spawn/toggle scratchpad kitty terminal
+│       └── discord-bot.sh      # Launch Discord bot in kitty on ws5
+└── fastfetch/          # System info display
     └── .config/fastfetch/config.jsonc
 ```
 
@@ -167,12 +180,12 @@ dotfiles/
 
 ```bash
 sudo pacman -S --needed - < package-list.txt
-paru -S --needed - < aur-package-list.txt
+yay -S --needed - < aur-package-list.txt
 ```
 
 Update the lists after installing new packages:
 
 ```bash
 pacman -Qqe > package-list.txt
-paru -Qqem > aur-package-list.txt
+yay -Qqem > aur-package-list.txt
 ```

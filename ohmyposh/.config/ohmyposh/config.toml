@@ -1,0 +1,57 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 2
+final_space = true
+console_title_template = "{{ .Folder }}"
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = false
+
+  [[blocks.segments]]
+  type = "path"
+  style = "plain"
+  foreground = "#33ccff"
+  template = " {{ .Path }}"
+
+  [blocks.segments.properties]
+  style = "folder"
+  max_depth = 3
+
+  [[blocks.segments]]
+  type = "git"
+  style = "plain"
+  foreground = "#a3e635"
+  foreground_templates = [
+    "{{ if .Working.Changed }}#f59e0b{{ end }}",
+    "{{ if .Staging.Changed }}#ef4444{{ end }}",
+  ]
+  template = "  {{ .HEAD }}{{ if .Working.Changed }} ±{{ end }}{{ if .Staging.Changed }} ✚{{ end }}"
+
+  [blocks.segments.properties]
+  fetch_status = true
+
+[[blocks]]
+type = "rprompt"
+overflow = "hidden"
+
+  [[blocks.segments]]
+  type = "time"
+  style = "plain"
+  foreground = "#555555"
+  template = "{{ .CurrentDate | date \"15:04\" }}"
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+  [[blocks.segments]]
+  type = "status"
+  style = "plain"
+  foreground = "#33ccff"
+  foreground_templates = ["{{ if gt .Code 0 }}#ef4444{{ end }}"]
+  template = "❯ "
+
+  [blocks.segments.properties]
+  always_enabled = true
