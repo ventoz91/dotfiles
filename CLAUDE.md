@@ -16,6 +16,9 @@ stow kitty
 stow fastfetch
 stow scripts
 stow rofi
+stow nvim
+stow dunst
+stow wlogout
 
 # Remove symlinks
 stow -D hypr
@@ -40,6 +43,12 @@ Key keybinds (`$mainMod` = Super):
 - `Return` → kitty, `B` → firefox, `E` → dolphin, `CTRL+Return` → rofi run
 - `SHIFT+B` → restart waybar, `L` → hyprlock, `Print` → screenshot
 - `F` → fullscreen, `V` → toggle float, `Q` → kill active
+- `SHIFT+V` → clipboard history via cliphist + rofi
+- `SHIFT+E` → power menu (wlogout)
+- `SHIFT+N` → toggle night mode (hyprsunset 3500K, toggle off to reset)
+
+### Kitty (`kitty/`)
+- `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
 - `config.jsonc` — bar layout; includes `modules.json` for shared module definitions
@@ -47,10 +56,26 @@ Key keybinds (`$mainMod` = Super):
 - `sysinfo.sh` — outputs JSON for the `custom/sysinfo` module (CPU%, RAM via `/proc/stat` + `free`)
 - `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
 - `style.css` — bar appearance
-- `power_menu.xml` — GTK menu for the power button widget (shutdown, reboot, lock)
+- `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
 
 ### Rofi (`rofi/`)
 - `config.rasi` — dark semi-transparent theme matching waybar; modes: drun (app launcher) + run (command); font: JetBrainsMono Nerd Font Propo Bold 13
+
+### Neovim (`nvim/`)
+- `init.lua` — single-file minimal config; no plugins
+- Leader: `Space`
+- Key options: relative numbers, 4-space indent, persistent undo, system clipboard (`unnamedplus` → wl-clipboard), `habamax` colorscheme
+- Keybinds: `<C-hjkl>` window nav, `[b`/`]b` buffer nav, `<C-d/u>` centered scroll, visual `J/K` line move, `[d`/`]d` diagnostic nav
+- Autocmds: yank flash, trailing whitespace strip on save, restore last cursor position, auto-equalise splits on resize
+
+### Dunst (`dunst/`)
+- `dunstrc` — notification styling matching the dark theme (rgba(20,20,20) bg, `#33ccff` frame, JetBrainsMono font, `corner_radius = 12`, Papirus-Dark icons); low/normal/critical urgency levels with distinct frame colors
+
+### Wlogout (`wlogout/`)
+- `layout` — 6 actions: lock (l), logout (e), suspend (u), hibernate (h), shutdown (s), reboot (r)
+- `style.css` — dark glassmorphism theme matching waybar; cyan accent on hover; uses `/usr/share/wlogout/icons/` for button images
+- Triggered by waybar power button or `Super+Shift+E`
+- Requires: `paru -S wlogout`
 
 ### Scripts (`scripts/`)
 - `screenshot.sh` — interactive region screenshot using `grim` + `slurp`; saves to `~/Pictures/Screenshots/` and copies to clipboard via `wl-copy`
@@ -71,4 +96,9 @@ paru -S --needed - < aur-package-list.txt
 
 ## Runtime dependencies
 
-Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`.
+Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`.
+
+Extra packages not in `package-list.txt` (AUR):
+```bash
+paru -S wlogout hyprsunset
+```

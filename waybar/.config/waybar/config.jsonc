@@ -23,7 +23,7 @@
 //        "network",
 //        "power-profiles-daemon",
 //        "cpu",
-        "memory",
+//	  "memory",
 //        "temperature",
 //        "backlight",
 //        "keyboard-state",
@@ -67,8 +67,7 @@
     "mpris": {
         "format": "{player_icon} {title}",
         "format-paused": "{status_icon} {title}",
-        "dynamic-len": 40,
-        "dynamic-importance-order": ["title", "artist", "album"],
+        "max-length": 20,
         "player-icons": {
             "default": "▶",
             "firefox": "󰈹",
@@ -153,16 +152,8 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : "⏻ ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"lock": "hyprlock"
-//			"suspend": "systemctl suspend",
-//			"hibernate": "systemctl hibernate"
-		}
+        "format": "⏻ ",
+        "tooltip": false,
+        "on-click": "wlogout"
     }
 }
