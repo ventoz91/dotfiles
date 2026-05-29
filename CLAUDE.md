@@ -12,7 +12,7 @@ Arch Linux dotfiles managed with GNU Stow. Each top-level directory is a stow pa
 
 ```bash
 # From ~/dotfiles, symlink a package into $HOME
-stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin
 
 # Remove symlinks
 stow -D hypr
@@ -29,6 +29,12 @@ Exceptions:
 The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in Hyprland keybinds and waybar modules.
 
 ## Components
+
+### Dolphin (`dolphin/`)
+- `dolphinrc` — show hidden files by default, details view, home as start location, file previews enabled
+- `kdeglobals` — KDE-wide dark color scheme (`TrevorDark`) matching the cyan/dark palette; read directly by KF6 apps; sets Papirus-Dark icon theme
+- `.local/share/dolphin/view_properties/global/.directory` — global view defaults: details mode, folders first, hidden files shown
+- Note: `dolphin/` is an exception — it maps both `.config/` and `.local/share/dolphin/` into `$HOME`
 
 ### Zsh (`zsh/`)
 - `.zshrc` — shell config; sources `zsh-autosuggestions` and `zsh-syntax-highlighting`, sets history options, aliases, launches fastfetch on start

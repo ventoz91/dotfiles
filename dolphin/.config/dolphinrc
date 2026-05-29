@@ -1,0 +1,15 @@
+[General]
+Version=202
+ShowHiddenFiles=true
+RememberOpenedTabs=false
+HomeUrl=file:///home/trevor
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,opendocumentthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
