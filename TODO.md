@@ -1,5 +1,34 @@
 # TODO
 
+## CLI / shell tool upgrades
+
+- [ ] **eza** — modern `ls` replacement
+  - Icons, colors, and a git-status column out of the box
+  - Replace the `ls`/`ll` aliases in `.zshrc`:
+    `alias ls='eza --icons --group-directories-first'`,
+    `alias ll='eza -lah --icons --git --group-directories-first'`
+  - Install: `yay -S eza`
+
+- [ ] **zoxide** — smarter `cd` (frecency-based jumping)
+  - `z dots` jumps to `~/dotfiles` from anywhere after visiting it once
+  - Add to `.zshrc`: `eval "$(zoxide init zsh)"` (optionally alias `cd=z`)
+  - Install: `yay -S zoxide`
+
+- [ ] **fzf** — fuzzy finder
+  - Wires Ctrl+R into a searchable, fuzzy shell-history picker; pairs with eza/zoxide
+  - Add to `.zshrc`: `source <(fzf --zsh)`
+  - Install: `yay -S fzf`
+
+- [ ] **lazygit** — full-screen git TUI
+  - Stage/commit/branch/rebase visually — ideal for a repo you commit to constantly
+  - Optional alias `lg='lazygit'` in `.zshrc`
+  - Install: `yay -S lazygit`
+
+- [ ] **btop** — resource monitor
+  - Gorgeous CPU/RAM/net/proc dashboard; replaces htop, matches the dark aesthetic
+  - Pick a theme in-app (TAB → Options) to match the cyan palette
+  - Install: `yay -S btop`
+
 ## Pending upgrades
 
 - [ ] **swww** — animated wallpaper transitions
