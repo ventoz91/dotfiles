@@ -13,7 +13,7 @@ Arch Linux + Hyprland desktop configuration managed with [GNU Stow](https://www.
 | Notifications     | Dunst                        |
 | Lock Screen       | Hyprlock                     |
 | Idle Daemon       | Hypridle                     |
-| Wallpaper         | Hyprpaper                    |
+| Wallpaper         | Hyprpaper + waypaper         |
 | Power Menu        | wlogout                      |
 | Night Mode        | hyprsunset                   |
 | Clipboard Manager | cliphist                     |
@@ -82,9 +82,14 @@ Edit `hypr/.config/hypr/conf/monitors.conf` for your display layout.
 | `Super + L`           | Lock screen (hyprlock)           |
 | `Super + Shift+E`     | Power menu (wlogout)             |
 | `Super + Shift+B`     | Restart waybar                   |
-| `Super + Print`       | Screenshot (region)              |
+| `Super + Print`       | Screenshot picker (region / fullscreen / active window) |
 | `Super + Shift+V`     | Clipboard history (cliphist)     |
 | `Super + Shift+N`     | Toggle night mode (hyprsunset)   |
+| `Super + Tab`         | Window switcher (rofi)           |
+| `Super + W`           | Wallpaper picker (waypaper)      |
+| `Super + C`           | Color picker → clipboard         |
+| `Super + Ctrl+N`      | Pop last notification            |
+| `Super + \``          | Toggle scratchpad terminal       |
 
 ### Workspaces
 

@@ -46,6 +46,11 @@ Key keybinds (`$mainMod` = Super):
 - `SHIFT+V` → clipboard history via cliphist + rofi
 - `SHIFT+E` → power menu (wlogout)
 - `SHIFT+N` → toggle night mode (hyprsunset 3500K, toggle off to reset)
+- `Tab` → rofi window switcher
+- `W` → waypaper wallpaper picker
+- `C` → hyprpicker (screen color → clipboard)
+- `CTRL+N` → dunstctl history-pop (re-show last notification)
+- `grave` → scratchpad terminal (spawn-on-demand kitty)
 
 ### Kitty (`kitty/`)
 - `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, dark colorscheme matching waybar/rofi palette, powerline tab bar
@@ -78,7 +83,8 @@ Key keybinds (`$mainMod` = Super):
 - Requires: `paru -S wlogout`
 
 ### Scripts (`scripts/`)
-- `screenshot.sh` — interactive region screenshot using `grim` + `slurp`; saves to `~/Pictures/Screenshots/` and copies to clipboard via `wl-copy`
+- `screenshot.sh` — rofi picker for region / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail
+- `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
 
 ### Fastfetch (`fastfetch/`)
 - `config.jsonc` — system info display with custom PNG logo (`mt.png`); uses chafa for image rendering in terminal
