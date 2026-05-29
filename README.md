@@ -54,10 +54,25 @@ stow -D <package>
 ## Monitors
 
 Configured for a dual-monitor setup:
-- **DP-1** — 3440×1440 @ 100Hz (primary ultrawide)
+- **DP-1** — 3440×1440 @ 100Hz (primary ultrawide, left)
 - **HDMI-A-1** — 1920×1080 @ 60Hz (right of primary)
 
 Edit `hypr/.config/hypr/conf/monitors.conf` for your display layout.
+
+## Workspace layout
+
+Workspaces 1–5 are persistent (always visible in the bar even when empty) and pinned to their monitor at login.
+
+| Workspace | Monitor        | Startup app                          |
+|-----------|----------------|--------------------------------------|
+| 1         | DP-1           | Firefox                              |
+| 2         | HDMI-A-1       | Firefox                              |
+| 3         | HDMI-A-1       | Discord                              |
+| 4         | DP-1           | *(empty)*                            |
+| 5         | DP-1           | Kitty → `Discord_Bot/run.sh`         |
+| 6–10      | follows window | *(dynamic)*                          |
+
+Workspaces 1–5 are pinned with `workspace = <id>, monitor:<mon>, persistent:true` rules in `hyprland.conf`.
 
 ## Keybindings
 
