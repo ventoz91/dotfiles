@@ -35,10 +35,13 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 - `kdeglobals` — KDE-wide dark color scheme (`TrevorDark`) matching the cyan/dark palette; read directly by KF6 apps; sets Papirus-Dark icon theme
 - `.local/share/dolphin/view_properties/global/.directory` — global view defaults: details mode, folders first, hidden files shown
 - Note: `dolphin/` is an exception — it maps both `.config/` and `.local/share/dolphin/` into `$HOME`
+- Requires: `plasma-integration` (KDE Qt platform theme plugin), `breeze` (Qt widget style)
 
 ### Zsh (`zsh/`)
-- `.zshrc` — shell config; sources `zsh-autosuggestions` and `zsh-syntax-highlighting`, sets history options, aliases, launches fastfetch on start
-- Plugins (installed via pacman): `zsh-autosuggestions`, `zsh-syntax-highlighting`
+- `.zshrc` — shell config; sources `zsh-autosuggestions`, `zsh-syntax-highlighting`, fzf key bindings, and zoxide; sets history options, aliases, launches fastfetch on start
+- Plugins (installed via pacman): `zsh-autosuggestions`, `zsh-syntax-highlighting`, `fzf`, `zoxide`
+- fzf loaded via `/usr/share/fzf/key-bindings.zsh` + `completion.zsh`; themed via `FZF_DEFAULT_OPTS`; binds `Ctrl+R` (history), `Ctrl+T` (file), `Alt+C` (cd)
+- zoxide init via `zoxide init zsh --cmd cd`; replaces `cd` with frecency-based jumping
 - Default shell set via `chsh -s /bin/zsh`
 
 ### Oh My Posh (`ohmyposh/`)
@@ -53,6 +56,8 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 - `hypridle.conf` — locks session after 900s idle via `loginctl lock-session`
 - `hyprlock.conf` / `hyprpaper.conf` — lock screen and wallpaper daemon config
 
+Active features: `inactive_opacity = 0.85`, window swallowing (kitty), smart gaps (collapse when 1 window), blur on rofi layer, `QT_QPA_PLATFORMTHEME=kde` for Dolphin theming.
+
 Key keybinds (`$mainMod` = Super):
 - `Return` → kitty, `B` → firefox, `E` → dolphin, `CTRL+Return` → rofi run
 - `SHIFT+B` → restart waybar, `L` → hyprlock, `Print` → screenshot
@@ -65,18 +70,19 @@ Key keybinds (`$mainMod` = Super):
 - `C` → hyprpicker (screen color → clipboard)
 - `CTRL+N` → dunstctl history-pop (re-show last notification)
 - `grave` → scratchpad terminal (spawn-on-demand kitty)
+- `XF86Audio*` / `XF86Brightness*` → `osd.sh` (dunst progress bar OSD)
 
 ### Kitty (`kitty/`)
-- `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor, dark colorscheme matching waybar/rofi palette, powerline tab bar
+- `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor with `cursor_trail 1`, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
-- `config.jsonc` — bar layout; includes `modules.json` for shared module definitions
-- `modules.json` — defines `hyprland/workspaces`, `custom/appmenu` (rofi drun), `custom/sysinfo`, and `tray`
+- `config.jsonc` — bar layout (height 34, font 14px); includes `modules.json` for shared module definitions
+- `modules.json` — defines `hyprland/workspaces` (Nerd Font icons per workspace), `hyprland/window` (active window title, cyan pill), `custom/appmenu`, `custom/sysinfo`, and `tray`
 - `sysinfo.sh` — outputs JSON for the `custom/sysinfo` module (CPU%, RAM via `/proc/stat` + `free`)
 - `updates.sh` — outputs pending pacman + AUR update count for a waybar module
 - `weather.sh` — outputs current weather via wttr.in for a waybar module
 - `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
-- `style.css` — bar appearance
+- `style.css` — bar appearance; `#window` pill styled cyan italic
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
 
 ### Rofi (`rofi/`)
@@ -101,6 +107,7 @@ Key keybinds (`$mainMod` = Super):
 ### Scripts (`scripts/`)
 - `screenshot.sh` — rofi picker for region / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail
 - `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
+- `osd.sh` — dunst progress-bar OSD for volume (`up`/`down`/`mute`) and brightness (`up`/`down`); called by Hyprland XF86 keybinds; uses `x-dunst-stack-tag:osd` so notifications stack rather than spam
 - `discord-bot.sh` — launched by startup-apps.sh on ws5; cd into Discord_Bot project and runs `run.sh`
 
 ### Fastfetch (`fastfetch/`)
@@ -119,14 +126,19 @@ yay -S --needed - < aur-package-list.txt
 
 ## Runtime dependencies
 
-Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`.
+Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`.
+
+Shell tools (pacman):
+```bash
+sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting fzf zoxide
+```
+
+Dolphin theming (pacman):
+```bash
+sudo pacman -S plasma-integration breeze
+```
 
 Extra packages (AUR):
 ```bash
 yay -S wlogout hyprsunset oh-my-posh
-```
-
-Zsh plugins (pacman):
-```bash
-sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
 ```
