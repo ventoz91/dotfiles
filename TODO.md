@@ -32,6 +32,29 @@
   - Scope: add `plugin { hyprexpo { ... } }` block to `hyprland.conf`,
     bind `Super+SHIFT+Tab` to `hyprexpo:expo, toggle`
 
+- [ ] **Volume/brightness OSD via dunst** — no install required
+  - Update the XF86 volume and brightness keybinds in `hyprland.conf` to also
+    fire a `notify-send` call alongside the existing `wpctl`/`brightnessctl` command
+  - Pass the new value as a hint (`-h int:value:<0-100>`) so dunst renders it
+    as a progress bar — instant visual feedback on every key press
+  - Scope: update 4 keybind lines in `hyprland.conf`, optionally add a small
+    helper script to calculate and format the current percentage cleanly
+
+- [ ] **Active window title in waybar** — no install required
+  - Waybar ships a built-in `hyprland/window` module that shows the focused
+    window's title; add it to `modules-center` alongside the workspaces widget
+  - Trim long titles with `max-length` and add a matching pill style in
+    `style.css` so it blends with the rest of the bar
+  - Scope: one module entry in `config.jsonc`, one CSS selector in `style.css`
+
+- [ ] **Inactive window dimming** — no install required
+  - Set `inactive_opacity = 0.85` in the `decoration` block of `hyprland.conf`
+    so unfocused windows dim slightly, making the active window visually pop
+    without any blur or border changes
+  - Optional: pair with `dim_inactive = true` and `dim_strength = 0.1` for a
+    subtler overlay-based dimming instead of opacity
+  - Scope: two lines in `hyprland.conf`
+
 - [ ] **AGS / Astal — full custom desktop shell**
   - Replace waybar entirely with a TypeScript-powered desktop shell:
     animated notification center that slides in from the right, OSD popups
