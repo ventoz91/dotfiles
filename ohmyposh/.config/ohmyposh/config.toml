@@ -11,7 +11,7 @@ newline = false
   [[blocks.segments]]
   type = "path"
   style = "plain"
-  foreground = "#33ccff"
+  foreground = "#aaaaaa"
   template = " {{ .Path }}"
 
   [blocks.segments.properties]

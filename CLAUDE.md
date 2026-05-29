@@ -6,19 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Arch Linux dotfiles managed with GNU Stow. Each top-level directory is a stow package whose internal path mirrors `~/.config/` so that `stow <package>` symlinks it into `$HOME`.
 
+`zsh/` and `ohmyposh/` are exceptions — they link into `$HOME` directly (not `~/.config/`).
+
 ## Deployment
 
 ```bash
 # From ~/dotfiles, symlink a package into $HOME
-stow hypr
-stow waybar
-stow kitty
-stow fastfetch
-stow scripts
-stow rofi
-stow nvim
-stow dunst
-stow wlogout
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh
 
 # Remove symlinks
 stow -D hypr
@@ -28,9 +22,22 @@ stow -D hypr
 
 Each package follows the pattern `<package>/.config/<package>/...` → `~/.config/<package>/...`.
 
+Exceptions:
+- `zsh/` maps `.zshrc` → `~/.zshrc`
+- `ohmyposh/` maps `.config/ohmyposh/` → `~/.config/ohmyposh/`
+
 The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in Hyprland keybinds and waybar modules.
 
 ## Components
+
+### Zsh (`zsh/`)
+- `.zshrc` — shell config; sources `zsh-autosuggestions` and `zsh-syntax-highlighting`, sets history options, aliases, launches fastfetch on start
+- Plugins (installed via pacman): `zsh-autosuggestions`, `zsh-syntax-highlighting`
+- Default shell set via `chsh -s /bin/zsh`
+
+### Oh My Posh (`ohmyposh/`)
+- `config.toml` — two-line prompt: full path (dim) + git branch/status (green/orange/red), dim clock rprompt, cyan `❯` that turns red on non-zero exit
+- Loaded in `.zshrc` via `eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"`
 
 ### Hyprland (`hypr/`)
 - `hyprland.conf` — main config; sources `conf/monitors.conf` for display layout
@@ -54,12 +61,14 @@ Key keybinds (`$mainMod` = Super):
 - `grave` → scratchpad terminal (spawn-on-demand kitty)
 
 ### Kitty (`kitty/`)
-- `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, dark colorscheme matching waybar/rofi palette, powerline tab bar
+- `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
 - `config.jsonc` — bar layout; includes `modules.json` for shared module definitions
 - `modules.json` — defines `hyprland/workspaces`, `custom/appmenu` (rofi drun), `custom/sysinfo`, and `tray`
 - `sysinfo.sh` — outputs JSON for the `custom/sysinfo` module (CPU%, RAM via `/proc/stat` + `free`)
+- `updates.sh` — outputs pending pacman + AUR update count for a waybar module
+- `weather.sh` — outputs current weather via wttr.in for a waybar module
 - `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
 - `style.css` — bar appearance
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
@@ -81,11 +90,12 @@ Key keybinds (`$mainMod` = Super):
 - `layout` — 6 actions: lock (l), logout (e), suspend (u), hibernate (h), shutdown (s), reboot (r)
 - `style.css` — dark glassmorphism theme matching waybar; cyan accent on hover; uses `/usr/share/wlogout/icons/` for button images
 - Triggered by waybar power button or `Super+Shift+E`
-- Requires: `paru -S wlogout`
+- Requires: `yay -S wlogout`
 
 ### Scripts (`scripts/`)
 - `screenshot.sh` — rofi picker for region / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail
 - `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
+- `discord-bot.sh` — launched by startup-apps.sh on ws5; cd into Discord_Bot project and runs `run.sh`
 
 ### Fastfetch (`fastfetch/`)
 - `config.jsonc` — system info display with custom PNG logo (`mt.png`); uses chafa for image rendering in terminal
@@ -93,19 +103,24 @@ Key keybinds (`$mainMod` = Super):
 ## Package lists
 
 - `package-list.txt` — pacman packages (`pacman -Qqe > package-list.txt`)
-- `aur-package-list.txt` — AUR packages (`paru -Qqem > aur-package-list.txt`)
+- `aur-package-list.txt` — AUR packages (`yay -Qqem > aur-package-list.txt`)
 
 To restore packages on a new install:
 ```bash
 pacman -S --needed - < package-list.txt
-paru -S --needed - < aur-package-list.txt
+yay -S --needed - < aur-package-list.txt
 ```
 
 ## Runtime dependencies
 
-Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`.
+Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`.
 
-Extra packages not in `package-list.txt` (AUR):
+Extra packages (AUR):
 ```bash
-paru -S wlogout hyprsunset
+yay -S wlogout hyprsunset oh-my-posh
+```
+
+Zsh plugins (pacman):
+```bash
+sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
 ```

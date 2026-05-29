@@ -9,7 +9,7 @@ Arch Linux + Hyprland desktop configuration managed with [GNU Stow](https://www.
 | Window Manager    | Hyprland                     |
 | Status Bar        | Waybar                       |
 | Terminal          | Kitty                        |
-| Shell             | Bash                         |
+| Shell             | Zsh                          |
 | Shell Prompt      | oh-my-posh                   |
 | App Launcher      | Rofi                         |
 | Notifications     | Dunst                        |
@@ -26,17 +26,17 @@ Arch Linux + Hyprland desktop configuration managed with [GNU Stow](https://www.
 
 ## Prerequisites
 
-Install all packages from the included lists:
-
 ```bash
 # Official repos
 sudo pacman -S --needed - < package-list.txt
+sudo pacman -S zsh zsh-autosuggestions zsh-syntax-highlighting
 
 # AUR (requires yay)
 yay -S --needed - < aur-package-list.txt
-
-# Extra tools used by these configs
 yay -S wlogout hyprsunset oh-my-posh
+
+# Set zsh as default shell
+chsh -s /bin/zsh
 ```
 
 ## Install
@@ -44,7 +44,7 @@ yay -S wlogout hyprsunset oh-my-posh
 ```bash
 git clone https://github.com/ventoz91/dotfiles ~/dotfiles
 cd ~/dotfiles
-stow hypr waybar rofi kitty nvim dunst wlogout scripts fastfetch bash ohmyposh
+stow hypr waybar rofi kitty nvim dunst wlogout scripts fastfetch zsh ohmyposh
 ```
 
 To remove a package's symlinks:
@@ -129,12 +129,12 @@ Workspaces 1–5 are pinned with `workspace = <id>, monitor:<mon>, persistent:tr
 
 ## Structure
 
-`bash/` and `ohmyposh/` link into `$HOME` directly; all others link into `~/.config/`.
+`zsh/` links into `$HOME`; all others link into `~/.config/`.
 
 ```
 dotfiles/
-├── bash/               # Shell config
-│   └── .bashrc
+├── zsh/                # Shell config
+│   └── .zshrc
 ├── hypr/               # Hyprland WM config
 │   └── .config/hypr/
 │       ├── hyprland.conf
