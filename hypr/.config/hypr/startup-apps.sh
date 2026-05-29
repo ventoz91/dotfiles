@@ -6,14 +6,12 @@ hyprctl keyword input:follow_mouse 0
 # ws1 (DP-1): Firefox
 hyprctl dispatch workspace 1
 hyprctl dispatch exec firefox
-sleep 4
+sleep 1
 
 # ws2 (HDMI-A-1): second Firefox window
-# The 4s sleep above lets the first instance finish starting so that
-# --new-window hits a running process rather than racing against it.
 hyprctl dispatch workspace 2
 hyprctl dispatch exec "firefox --new-window"
-sleep 2
+sleep 1
 
 # ws5 (HDMI-A-1): Discord bot terminal
 hyprctl dispatch workspace 5
