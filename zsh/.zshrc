@@ -26,6 +26,13 @@ alias vi='nvim'
 alias vim='nvim'
 alias dn='python3 ~/Documents/Projects/Daily/daily.py'
 
+# fzf — fuzzy finder (Ctrl+R history, Ctrl+T file search, Alt+C cd)
+source <(fzf --zsh)
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --color=bg+:#1a1a1a,bg:#141414,spinner:#33ccff,hl:#33ccff,fg:#cdd6f4,header:#33ccff,info:#00ff99,pointer:#33ccff,marker:#00ff99,fg+:#cdd6f4,prompt:#33ccff,hl+:#00ff99'
+
+# zoxide — frecency-based directory jumping (replaces cd)
+eval "$(zoxide init zsh --cmd cd)"
+
 fastfetch
 
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"

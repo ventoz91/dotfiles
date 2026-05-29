@@ -9,15 +9,9 @@
     `alias ll='eza -lah --icons --git --group-directories-first'`
   - Install: `yay -S eza`
 
-- [ ] **zoxide** — smarter `cd` (frecency-based jumping)
-  - `z dots` jumps to `~/dotfiles` from anywhere after visiting it once
-  - Add to `.zshrc`: `eval "$(zoxide init zsh)"` (optionally alias `cd=z`)
-  - Install: `yay -S zoxide`
+- [x] **zoxide** — `eval "$(zoxide init zsh --cmd cd)"` in `.zshrc`; replaces `cd` with frecency jumping
 
-- [ ] **fzf** — fuzzy finder
-  - Wires Ctrl+R into a searchable, fuzzy shell-history picker; pairs with eza/zoxide
-  - Add to `.zshrc`: `source <(fzf --zsh)`
-  - Install: `yay -S fzf`
+- [x] **fzf** — `source <(fzf --zsh)` in `.zshrc`; themed to match palette; Ctrl+R, Ctrl+T, Alt+C wired
 
 - [ ] **lazygit** — full-screen git TUI
   - Stage/commit/branch/rebase visually — ideal for a repo you commit to constantly
