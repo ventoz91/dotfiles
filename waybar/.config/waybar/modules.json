@@ -2,8 +2,28 @@
 	// Workspaces
 	"hyprland/workspaces" : {
 		"on-click": "activate",
-		"active-only": false, 
-			"all-outputs": true
+		"active-only": false,
+		"all-outputs": true,
+		"format": "{icon}",
+		"format-icons": {
+			"1": "󰈹",
+			"2": "󰈹",
+			"3": "󰙯",
+			"4": "",
+			"5": "",
+			"default": ""
+		}
+	},
+
+	// Active window title
+	"hyprland/window": {
+		"max-length": 50,
+		"separate-outputs": true,
+		"format": "{}",
+		"rewrite": {
+			"(.*) — Mozilla Firefox": "󰈹 $1",
+			"(.*) - kitty": " $1"
+		}
 	},
 
 	// Rofi Application Launcher

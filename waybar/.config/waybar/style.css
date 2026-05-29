@@ -1,6 +1,6 @@
 * {
     font-family: 'JetBrainsMono Nerd Font Propo', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -104,6 +104,15 @@ button {
 
 #custom-updates.urgent {
     color: #f53c3c;
+}
+
+#window {
+    background-color: rgba(20, 20, 20, 0.55);
+    border-radius: 20px;
+    padding: 0 12px;
+    margin: 4px 3px;
+    color: #33ccff;
+    font-style: italic;
 }
 
 #tray > .passive {

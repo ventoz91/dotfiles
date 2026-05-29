@@ -61,28 +61,21 @@
   - Scope: add `plugin { hyprexpo { ... } }` block to `hyprland.conf`,
     bind `Super+SHIFT+Tab` to `hyprexpo:expo, toggle`
 
-- [ ] **Volume/brightness OSD via dunst** — no install required
-  - Update the XF86 volume and brightness keybinds in `hyprland.conf` to also
-    fire a `notify-send` call alongside the existing `wpctl`/`brightnessctl` command
-  - Pass the new value as a hint (`-h int:value:<0-100>`) so dunst renders it
-    as a progress bar — instant visual feedback on every key press
-  - Scope: update 4 keybind lines in `hyprland.conf`, optionally add a small
-    helper script to calculate and format the current percentage cleanly
+- [x] **Volume/brightness OSD via dunst** — `scripts/osd.sh`, keybinds updated in `hyprland.conf`
 
-- [ ] **Active window title in waybar** — no install required
-  - Waybar ships a built-in `hyprland/window` module that shows the focused
-    window's title; add it to `modules-center` alongside the workspaces widget
-  - Trim long titles with `max-length` and add a matching pill style in
-    `style.css` so it blends with the rest of the bar
-  - Scope: one module entry in `config.jsonc`, one CSS selector in `style.css`
+- [x] **Active window title in waybar** — `hyprland/window` in `modules.json` + `config.jsonc` + `style.css`
 
-- [ ] **Inactive window dimming** — no install required
-  - Set `inactive_opacity = 0.85` in the `decoration` block of `hyprland.conf`
-    so unfocused windows dim slightly, making the active window visually pop
-    without any blur or border changes
-  - Optional: pair with `dim_inactive = true` and `dim_strength = 0.1` for a
-    subtler overlay-based dimming instead of opacity
-  - Scope: two lines in `hyprland.conf`
+- [x] **Inactive window dimming** — `inactive_opacity = 0.85` in `hyprland.conf`
+
+- [x] **Workspace icons in waybar** — Nerd Font icons per workspace in `modules.json` `format-icons`
+
+- [x] **Window swallowing** — `enable_swallow = true` + `swallow_regex` in `misc {}` in `hyprland.conf`
+
+- [x] **Blur layerrules** — `layerrule = blur, waybar/rofi` + bumped blur quality in `hyprland.conf`
+
+- [x] **Smart gaps** — uncommented workspace rules in `hyprland.conf`; gaps collapse to 0 when only one window open
+
+- [x] **Kitty cursor trail** — `cursor_trail 1` in `kitty.conf`
 
 - [ ] **AGS / Astal — full custom desktop shell**
   - Replace waybar entirely with a TypeScript-powered desktop shell:
