@@ -69,7 +69,7 @@ Workspaces 1–5 are persistent (always visible in the bar even when empty) and 
 | 2         | HDMI-A-1       | Firefox                              |
 | 3         | HDMI-A-1       | Discord                              |
 | 4         | DP-1           | *(empty)*                            |
-| 5         | DP-1           | Kitty → `Discord_Bot/run.sh`         |
+| 5         | HDMI-A-1       | Kitty → `Discord_Bot/run.sh`         |
 | 6–10      | follows window | *(dynamic)*                          |
 
 Workspaces 1–5 are pinned with `workspace = <id>, monitor:<mon>, persistent:true` rules in `hyprland.conf`.
