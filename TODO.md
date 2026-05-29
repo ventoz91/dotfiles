@@ -40,7 +40,7 @@
 
 ## Pending upgrades
 
-- [x] **swww** — `swww-daemon` in autostart; `random-wallpaper.sh` rewritten as 30-min rotation loop with grow transition; hyprpaper removed
+- [x] **awww** (formerly swww) — `awww-daemon` in autostart; `random-wallpaper.sh` rewritten as 30-min rotation loop with grow transition; hyprpaper removed
 
 - [ ] **matugen — whole-desktop dynamic color theming from wallpaper**
   - `matugen` generates a Material You palette from any image and outputs theme
@@ -48,7 +48,7 @@
   - Wire it into `random-wallpaper.sh` so every wallpaper rotation recolors
     waybar CSS, rofi theme, kitty colors, dunstrc frame color, and hyprlock
     background — the entire desktop repaints itself on each wallpaper change
-  - Pairs perfectly with swww: fade to new wallpaper → palette regenerates → configs reload
+  - Pairs perfectly with awww: fade to new wallpaper → palette regenerates → configs reload
   - Install: `paru -S matugen`
   - Scope: new `scripts/apply-theme.sh`, template files for each config,
     hook into `random-wallpaper.sh` and `waybar/startup.sh`
