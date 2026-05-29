@@ -2,6 +2,21 @@
 
 ## CLI / shell tool upgrades
 
+- [ ] **bat** — syntax-highlighted `cat` replacement
+  - Line numbers, git diff markers, colour for every config/code file you print
+  - Add alias to `.zshrc`: `alias cat='bat'`
+  - Install: `yay -S bat`
+
+- [ ] **fd** — modern `find`, boosts fzf's Ctrl+T
+  - Respects `.gitignore`, dramatically faster than `find`
+  - Add to `.zshrc`: `export FZF_DEFAULT_COMMAND='fd --type f'` and `export FZF_CTRL_T_COMMAND='fd --type f'`
+  - Install: `yay -S fd`
+
+- [ ] **yazi** — TUI file manager with image preview
+  - Vim-style nav, kitty image protocol support, fzf integration
+  - Complements Dolphin for terminal-first workflows
+  - Install: `yay -S yazi`
+
 - [ ] **eza** — modern `ls` replacement
   - Icons, colors, and a git-status column out of the box
   - Replace the `ls`/`ll` aliases in `.zshrc`:
@@ -70,6 +85,20 @@
 - [x] **Smart gaps** — uncommented workspace rules in `hyprland.conf`; gaps collapse to 0 when only one window open
 
 - [x] **Kitty cursor trail** — `cursor_trail 1` in `kitty.conf`
+
+- [ ] **Now-playing dunst notification on track change** — no install required
+  - Script running `playerctl --follow metadata` that fires `notify-send` on each track change
+  - Shows artist + title + album art (if available via `playerctl metadata mpris:artUrl`)
+  - Add to autostart in `hyprland.conf`; stack tag so it never spams
+
+- [ ] **Sysinfo click → btop** — no install required (once btop is installed)
+  - Add `"on-click": "kitty -e btop"` to `custom/sysinfo` in `modules.json`
+  - One line change
+
+- [ ] **Picture-in-picture keybind** — no install required
+  - `Super+P` floats the focused window, resizes to ~30% width, moves to bottom-right corner, pins across all workspaces
+  - Bind: `hyprctl dispatch togglefloating` + `setfloatingsize` + `movewindow` + `pin`
+  - Scope: one `bind` line + a small shell script in `scripts/`
 
 - [ ] **AGS / Astal — full custom desktop shell**
   - Replace waybar entirely with a TypeScript-powered desktop shell:
