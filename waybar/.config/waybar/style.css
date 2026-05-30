@@ -40,6 +40,8 @@ button {
 #workspaces,
 #custom-sysinfo,
 #custom-appmenu,
+#custom-files,
+#custom-habits,
 #custom-updates,
 #custom-weather,
 #custom-power {
@@ -122,6 +124,29 @@ button {
 #custom-power:hover {
     color: #f38ba8;
     background-color: rgba(243, 139, 168, 0.2);
+}
+
+/* Files button */
+#custom-files:hover {
+    color: #33ccff;
+    background-color: rgba(51, 204, 255, 0.15);
+}
+
+/* Habits widget states */
+#custom-habits.habits-all {
+    color: #00ff99;
+}
+
+#custom-habits.habits-partial {
+    color: #ffffff;
+}
+
+#custom-habits.habits-none {
+    color: #f53c3c;
+}
+
+#custom-habits.habits-no-note {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 #tray > .passive {

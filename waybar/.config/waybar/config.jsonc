@@ -156,7 +156,7 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/files": {
-        "format": " ",
+        "format": "  Files",
         "tooltip": false,
         "on-click": "dolphin"
     },
