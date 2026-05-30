@@ -32,6 +32,7 @@
 //        "battery",
 //        "battery#bat2",
 	"network",
+	"custom/habits",
 	"custom/updates",
         "custom/weather",
         "clock",
@@ -152,6 +153,13 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/habits": {
+        "exec": "~/Documents/Projects/Daily/venv/bin/python ~/Documents/Projects/Daily/daily.py waybar",
+        "interval": 300,
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true
     },
     "custom/weather": {
         "exec": "~/.config/waybar/weather.sh",
