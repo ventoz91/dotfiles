@@ -107,6 +107,7 @@ Workspaces 1–5 are pinned with `workspace = <id>, monitor:<mon>, persistent:tr
 | `Super + C`           | Color picker → clipboard         |
 | `Super + Ctrl+N`      | Pop last notification            |
 | `Super + \``          | Toggle scratchpad terminal       |
+| `Super + N`           | Quick note capture (rofi prompt → daily notes) |
 
 ### Workspaces
 
@@ -146,13 +147,14 @@ dotfiles/
 │       └── conf/monitors.conf
 ├── waybar/             # Status bar
 │   └── .config/waybar/
-│       ├── config.jsonc
-│       ├── modules.json
+│       ├── config.jsonc            # Primary bar (DP-1)
+│       ├── config-secondary.jsonc  # Secondary bar (HDMI-A-1) — minimal layout
+│       ├── modules.json            # Shared module definitions
 │       ├── style.css
 │       ├── sysinfo.sh      # CPU/RAM stats for waybar module
 │       ├── updates.sh      # Pending pacman/AUR update count
 │       ├── weather.sh      # Current weather via wttr.in
-│       └── startup.sh      # Kill + restart waybar
+│       └── startup.sh      # Kill + restart both bar instances
 ├── kitty/              # Terminal emulator
 │   └── .config/kitty/kitty.conf
 ├── ohmyposh/           # Shell prompt
@@ -171,7 +173,8 @@ dotfiles/
 │   └── .config/scripts/
 │       ├── screenshot.sh       # Region / fullscreen / window screenshot picker
 │       ├── scratchpad.sh       # Spawn/toggle scratchpad kitty terminal
-│       └── discord-bot.sh      # Launch Discord bot in kitty on ws5
+│       ├── discord-bot.sh      # Launch Discord bot in kitty on ws5
+│       └── osd.sh              # Dunst progress-bar OSD for volume/brightness
 └── fastfetch/          # System info display
     └── .config/fastfetch/config.jsonc
 ```

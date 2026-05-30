@@ -70,20 +70,26 @@ Key keybinds (`$mainMod` = Super):
 - `C` → hyprpicker (screen color → clipboard)
 - `CTRL+N` → dunstctl history-pop (re-show last notification)
 - `grave` → scratchpad terminal (spawn-on-demand kitty)
+- `N` → rofi quick-capture prompt → `dn note "<text>"` (appends to today's daily note)
 - `XF86Audio*` / `XF86Brightness*` → `osd.sh` (dunst progress bar OSD)
 
 ### Kitty (`kitty/`)
 - `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor with `cursor_trail 1`, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
-- `config.jsonc` — bar layout (height 34, font 14px); includes `modules.json` for shared module definitions; clock shows `Mon 29  14:32`; pulseaudio scroll-wheel volume control
-- `modules.json` — defines `hyprland/workspaces` (numbered), `hyprland/window` (active window title, cyan pill, hides when empty), `custom/appmenu`, `custom/sysinfo` (click → btop), and `tray`
-- `sysinfo.sh` — outputs JSON for the `custom/sysinfo` module (CPU%, RAM via `/proc/stat` + `free`); click opens btop
-- `updates.sh` — outputs pending pacman + AUR update count for a waybar module
-- `weather.sh` — outputs current weather via wttr.in for a waybar module
-- `startup.sh` — kills and restarts waybar (used by `SUPER+SHIFT+B`)
-- `style.css` — bar appearance; active workspace cyan solid pill; urgent workspace pulses red; power button red on hover; `#window` pill hides when empty
+- `config.jsonc` — primary bar pinned to `DP-1`; height 34, font 14px; includes `modules.json`; clock `Mon 29  14:32`; pulseaudio scroll-wheel volume; left: `appmenu`, `files`, `tray`, `sysinfo`, `habits`; right: `mpd`, `mpris`, `pulseaudio`, `network`, `updates`, `weather`, `clock`, `power`
+- `config-secondary.jsonc` — minimal bar pinned to `HDMI-A-1`; left: `appmenu`, `files`; center: `hyprland/workspaces`, `hyprland/window`; includes `modules.json` for shared definitions
+- `modules.json` — defines `hyprland/workspaces` (numbered, all outputs), `hyprland/window` (active title, rewrites Firefox/kitty titles, hides when empty), `custom/appmenu` (click → rofi drun), `custom/sysinfo` (click → btop), `custom/updates`, `tray`
+- `style.css` — pill backgrounds (`border-radius: 20px`) for all modules; active workspace cyan solid; `habits-all` green / `habits-partial` white / `habits-none` red / `habits-no-note` dimmed; files hover cyan; power button red on hover; `#window` pill hides when empty
+- `sysinfo.sh` — outputs JSON for `custom/sysinfo` (CPU%, RAM)
+- `updates.sh` — outputs pending pacman + AUR update count
+- `weather.sh` — outputs current weather via wttr.in
+- `startup.sh` — kills all waybar instances and relaunches both (`config.jsonc` + `config-secondary.jsonc`) in background; bound to `Super+Shift+B`
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
+
+Custom modules defined inline in `config.jsonc`:
+- `custom/files` — "Files" button, click opens Dolphin
+- `custom/habits` — polls `dn waybar` every 5 min; shows habit completion from today's note (falls back to yesterday with `(yday)` marker if no note yet); `WAYBAR_HABITS` in `daily.py` controls which habits appear in bar text vs ratio view
 
 ### Waypaper (`waypaper/`)
 - `config.ini` — wallpaper picker config; backend set to `awww`, grow transition at 1.5s/60fps; bound to `Super+W`
@@ -112,6 +118,8 @@ Key keybinds (`$mainMod` = Super):
 - `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
 - `osd.sh` — dunst progress-bar OSD for volume (`up`/`down`/`mute`) and brightness (`up`/`down`); called by Hyprland XF86 keybinds; uses `x-dunst-stack-tag:osd` so notifications stack rather than spam
 - `discord-bot.sh` — launched by startup-apps.sh on ws5; cd into Discord_Bot project and runs `run.sh`
+
+Note: `~/Documents/Projects/Daily/scripts/rofi-note.sh` is part of the Daily project (not stowed), but is triggered by a Hyprland keybind (`Super+N`). It opens a minimal rofi dmenu prompt, passes the result to `dn note`, and fires a dunst confirmation notification.
 
 ### Fastfetch (`fastfetch/`)
 - `config.jsonc` — system info display with custom PNG logo (`mt.png`); uses chafa for image rendering in terminal
