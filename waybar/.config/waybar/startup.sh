@@ -3,4 +3,5 @@
 
 killall waybar
 
-waybar
+waybar -c ~/.config/waybar/config.jsonc &
+waybar -c ~/.config/waybar/config-secondary.jsonc &
