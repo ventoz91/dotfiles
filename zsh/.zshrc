@@ -24,7 +24,7 @@ alias ll='ls -lahF'
 alias grep='grep --color=auto'
 alias vi='nvim'
 alias vim='nvim'
-alias dn='python3 ~/Documents/Projects/Daily/daily.py'
+alias dn='~/Documents/Projects/Daily/venv/bin/python ~/Documents/Projects/Daily/daily.py'
 
 # fzf — fuzzy finder (Ctrl+R history, Ctrl+T file search, Alt+C cd)
 source /usr/share/fzf/key-bindings.zsh
