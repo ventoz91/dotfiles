@@ -47,6 +47,7 @@
 		"return-type": "json",
 		"format": "{}",
 		"tooltip": true,
-		"on-click": "kitty -e bash -c 'sudo pacman -Syu; read -p \"Press enter to close\"'"
+		"signal": 10,
+		"on-click": "kitty --class update-manager -e ~/.config/scripts/update-manager.sh"
 	}
 }
