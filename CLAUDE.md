@@ -12,7 +12,7 @@ Arch Linux dotfiles managed with GNU Stow. Each top-level directory is a stow pa
 
 ```bash
 # From ~/dotfiles, symlink a package into $HOME
-stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper bin
 
 # Remove symlinks
 stow -D hypr
@@ -25,6 +25,7 @@ Each package follows the pattern `<package>/.config/<package>/...` → `~/.confi
 Exceptions:
 - `zsh/` maps `.zshrc` → `~/.zshrc`
 - `ohmyposh/` maps `.config/ohmyposh/` → `~/.config/ohmyposh/`
+- `bin/` maps `.local/bin/` → `~/.local/bin/` (user executables)
 
 The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in Hyprland keybinds and waybar modules.
 
