@@ -12,7 +12,7 @@ Arch Linux dotfiles managed with GNU Stow. Each top-level directory is a stow pa
 
 ```bash
 # From ~/dotfiles, symlink a package into $HOME
-stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper bin
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper bin crandle
 
 # Remove symlinks
 stow -D hypr
@@ -135,6 +135,12 @@ To restore packages on a new install:
 pacman -S --needed - < package-list.txt
 yay -S --needed - < aur-package-list.txt
 ```
+
+### Crandle (`crandle/`)
+- Systemd user units for the homelab inventory scanner (`~/Documents/Projects/crandle`)
+- `crandle.service` — runs `inventory.py --master` via the project venv; writes/overwrites `~/Documents/Notes/Ventoz/Reference/HardwareSurvey.md` and saves a timestamped archive alongside it
+- `crandle.timer` — fires every Sunday at 02:00; `Persistent=true` catches missed runs on next boot
+- Requires a Proxmox API token set in `~/Documents/Projects/crandle/inventory.yml` (`token_id` / `token_secret`) for non-interactive auth; SSH hosts use key auth
 
 ## Runtime dependencies
 

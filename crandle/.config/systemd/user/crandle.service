@@ -1,0 +1,11 @@
+[Unit]
+Description=Crandle homelab inventory scan
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/trevor/Documents/Projects/crandle
+ExecStart=/home/trevor/Documents/Projects/.venv/bin/python3 /home/trevor/Documents/Projects/crandle/inventory.py --master
+StandardOutput=journal
+StandardError=journal

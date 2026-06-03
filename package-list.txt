@@ -136,6 +136,7 @@ os-prober
 otf-font-awesome
 pacman-contrib
 papirus-icon-theme
+paru
 pavucontrol
 perl
 pipewire-alsa
