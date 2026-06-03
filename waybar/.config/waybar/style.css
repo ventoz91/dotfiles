@@ -44,6 +44,7 @@ button {
 #custom-habits,
 #custom-updates,
 #custom-weather,
+#custom-nightmode,
 #custom-power {
     background-color: rgba(20, 20, 20, 0.55);
     border-radius: 20px;
@@ -151,6 +152,15 @@ button {
 
 #custom-habits.habits-no-checkin {
     color: #f9e2af;
+}
+
+/* Night mode */
+#custom-nightmode.night-on {
+    color: #fab387;
+}
+
+#custom-nightmode.night-off {
+    color: #ffffff;
 }
 
 #tray > .passive {

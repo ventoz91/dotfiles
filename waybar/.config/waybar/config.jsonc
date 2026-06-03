@@ -23,6 +23,7 @@
         "mpd",
         "mpris",
 //        "idle_inhibitor",
+        "custom/nightmode",
         "pulseaudio",
 //        "network",
 //        "power-profiles-daemon",
@@ -178,6 +179,14 @@
         "return-type": "json",
         "format": "{}",
         "tooltip": true
+    },
+    "custom/nightmode": {
+        "exec": "~/.config/waybar/nightmode.sh",
+        "interval": "once",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "signal": 9
     },
     "custom/power": {
         "format": "⏻ ",
