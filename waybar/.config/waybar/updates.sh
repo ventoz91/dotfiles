@@ -5,8 +5,8 @@ pacman_count=$(echo "$pacman_updates" | grep -c .)
 
 aur_count=0
 aur_updates=""
-if command -v paru &>/dev/null; then
-    aur_updates=$(paru -Qua 2>/dev/null)
+if command -v yay &>/dev/null; then
+    aur_updates=$(yay -Qua 2>/dev/null)
     aur_count=$(echo "$aur_updates" | grep -c .)
 fi
 

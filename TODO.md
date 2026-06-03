@@ -49,7 +49,7 @@
     waybar CSS, rofi theme, kitty colors, dunstrc frame color, and hyprlock
     background — the entire desktop repaints itself on each wallpaper change
   - Pairs perfectly with awww: fade to new wallpaper → palette regenerates → configs reload
-  - Install: `paru -S matugen`
+  - Install: `yay -S matugen`
   - Scope: new `scripts/apply-theme.sh`, template files for each config,
     hook into `random-wallpaper.sh` and `waybar/startup.sh`
 
@@ -100,7 +100,7 @@
     and a clock widget on the desktop
   - Every pixel is yours — no module format strings, just code
   - This is endgame Hyprland customization; budget a weekend
-  - Install: `paru -S ags` (AGS v1) or `paru -S astal-git` (AGS v2 / Astal)
+  - Install: `yay -S ags` (AGS v1) or `yay -S astal-git` (AGS v2 / Astal)
   - Reference configs: end-4/dots-hyprland on GitHub is the gold standard
   - Scope: new `ags/` stow package, full rewrite of the status bar surface,
     remove waybar once feature-parity is reached
