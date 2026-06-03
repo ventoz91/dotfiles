@@ -1,3 +1,4 @@
+# Updated: 2026-06-02
 oh-my-posh
 sddm-silent-theme
 waypaper

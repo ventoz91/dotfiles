@@ -1,3 +1,4 @@
+# Updated: 2026-06-02
 7zip
 accountsservice
 alsa-firmware
@@ -130,7 +131,6 @@ ntp
 numlockx
 nvtop
 obsidian
-oh-my-posh
 openssh
 os-prober
 otf-font-awesome
@@ -162,7 +162,6 @@ rsync
 rtkit
 s-nail
 sddm
-sddm-silent-theme
 sg3_utils
 slurp
 smartmontools
@@ -190,14 +189,12 @@ usb_modeswitch
 usbutils
 vulkan-radeon
 waybar
-waypaper
 welcome
 wget
 which
 whois
 wireless-regdb
 wireplumber
-wlogout
 xdg-desktop-portal-hyprland
 xdg-desktop-portal-wlr
 xdg-user-dirs
