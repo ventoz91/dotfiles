@@ -1,4 +1,3 @@
-# Updated: 2026-06-02
 7zip
 accountsservice
 alsa-firmware
@@ -90,6 +89,7 @@ iptables
 iwd
 jdk-openjdk
 jfsutils
+jq
 jre25-openjdk
 kitty
 less
@@ -203,6 +203,8 @@ xfsprogs
 xl2tpd
 xterm
 yay
+ydotool
+yt-dlp
 zip
 zoxide
 zsh

@@ -6,11 +6,11 @@ cpu=$(grep 'cpu ' /proc/stat)
 sleep 0.1
 cpu2=$(grep 'cpu ' /proc/stat)
 
-cpu_idle1=$(echo $cpu | awk '{print $5}')
-cpu_idle2=$(echo $cpu2 | awk '{print $5}')
+cpu_idle1=$(echo "$cpu" | awk '{print $5}')
+cpu_idle2=$(echo "$cpu2" | awk '{print $5}')
 
-cpu_total1=$(echo $cpu | awk '{sum=0; for(i=2;i<=NF;i++) sum+=$i; print sum}')
-cpu_total2=$(echo $cpu2 | awk '{sum=0; for(i=2;i<=NF;i++) sum+=$i; print sum}')
+cpu_total1=$(echo "$cpu" | awk '{sum=0; for(i=2;i<=NF;i++) sum+=$i; print sum}')
+cpu_total2=$(echo "$cpu2" | awk '{sum=0; for(i=2;i<=NF;i++) sum+=$i; print sum}')
 
 cpu_usage=$((100 * ( (cpu_total2-cpu_total1) - (cpu_idle2-cpu_idle1) ) / (cpu_total2-cpu_total1) ))
 

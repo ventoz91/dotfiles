@@ -8,4 +8,4 @@ Target = *
 [Action]
 Description = Updating package lists in dotfiles...
 When = PostTransaction
-Exec = /bin/sh -c 'echo "# Updated: $(date +%Y-%m-%d)" > /home/trevor/dotfiles/package-list.txt && pacman -Qqen >> /home/trevor/dotfiles/package-list.txt && echo "# Updated: $(date +%Y-%m-%d)" > /home/trevor/dotfiles/aur-package-list.txt && pacman -Qqem >> /home/trevor/dotfiles/aur-package-list.txt'
+Exec = /bin/sh -c 'pacman -Qqen > /home/trevor/dotfiles/package-list.txt && pacman -Qqem > /home/trevor/dotfiles/aur-package-list.txt'

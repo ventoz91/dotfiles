@@ -55,13 +55,13 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 - `random-wallpaper.sh` — daemon loop: picks a random image from `~/Pictures/wallpaper/`, applies it via `awww img` with a grow transition, then sleeps 30 minutes and repeats; waits for `awww-daemon` on startup
 - `startup-apps.sh` — staggered workspace layout on login: disables `follow_mouse`, switches to each workspace and launches its app, re-enables `follow_mouse` after all windows appear. Order: Firefox ws1 → Firefox ws2 → kitty bot ws5 → Discord ws3 (last, slowest)
 - `hypridle.conf` — locks session after 900s idle via `loginctl lock-session`
-- `hyprlock.conf` / `hyprpaper.conf` — lock screen and wallpaper daemon config
+- `hyprlock.conf` — lock screen config
 
 Active features: `inactive_opacity = 0.85`, window swallowing (kitty), smart gaps (collapse when 1 window), blur on rofi layer, `QT_QPA_PLATFORMTHEME=kde` for Dolphin theming.
 
 Key keybinds (`$mainMod` = Super):
 - `Return` → kitty, `B` → firefox, `E` → dolphin, `CTRL+Return` → rofi run
-- `SHIFT+B` → restart waybar, `L` → hyprlock, `Print` → screenshot
+- `SHIFT+B` → restart waybar, `L` → hyprlock, `Super+Print` → screenshot
 - `F` → fullscreen, `V` → toggle float, `Q` → kill active
 - `SHIFT+V` → clipboard history via cliphist + rofi
 - `SHIFT+E` → power menu (wlogout)
@@ -72,6 +72,7 @@ Key keybinds (`$mainMod` = Super):
 - `CTRL+N` → dunstctl history-pop (re-show last notification)
 - `grave` → scratchpad terminal (spawn-on-demand kitty)
 - `N` → rofi quick-capture prompt → `dn note "<text>"` (appends to today's daily note)
+- `Y` → `yt.sh` (YouTube → mpv floating window)
 - `XF86Audio*` / `XF86Brightness*` → `osd.sh` (dunst progress bar OSD)
 
 ### Kitty (`kitty/`)
@@ -93,7 +94,7 @@ Custom modules defined inline in `config.jsonc`:
 - `custom/habits` — polls `dn waybar` every 5 min; shows habit completion from today's note (falls back to yesterday with `(yday)` marker if no note yet); `WAYBAR_HABITS` in `daily.py` lists habits to show individually in bar text as `Name █/░` blocks followed by overall ratio (e.g. `Fitness ░  Programming █  3/4`); empty list shows ratio only
 
 ### Waypaper (`waypaper/`)
-- `config.ini` — wallpaper picker config; backend set to `awww`, grow transition at 1.5s/60fps; bound to `Super+W`
+- `config.ini` — wallpaper picker config; backend set to `awww`; bound to `Super+W` (note: transition settings like grow/1.5s/60fps are configured in `random-wallpaper.sh`, not here — the `swww_transition_*` keys in config.ini are unused legacy from a prior swww setup)
 
 ### Rofi (`rofi/`)
 - `config.rasi` — dark semi-transparent theme matching waybar; modes: drun (app launcher) + run (command); font: JetBrainsMono Nerd Font Propo Bold 13
@@ -119,6 +120,7 @@ Custom modules defined inline in `config.jsonc`:
 - `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
 - `osd.sh` — dunst progress-bar OSD for volume (`up`/`down`/`mute`) and brightness (`up`/`down`); called by Hyprland XF86 keybinds; uses `x-dunst-stack-tag:osd` so notifications stack rather than spam
 - `discord-bot.sh` — launched by startup-apps.sh on ws5; cd into Discord_Bot project and runs `run.sh`
+- `yt.sh` — open a YouTube URL in a floating mpv window; priority: Firefox address bar (via `ydotool` key injection) → clipboard → rofi prompt (pre-filled if clipboard looks like a URL); bound to `Super+Y`
 
 Note: `~/Documents/Projects/Daily/scripts/rofi-note.sh` is part of the Daily project (not stowed), but is triggered by a Hyprland keybind (`Super+N`). It opens a minimal rofi dmenu prompt, passes the result to `dn note`, and fires a dunst confirmation notification.
 
@@ -144,7 +146,7 @@ yay -S --needed - < aur-package-list.txt
 
 ## Runtime dependencies
 
-Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `hyprpaper`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`.
+Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `awww`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`.
 
 Shell tools (pacman):
 ```bash

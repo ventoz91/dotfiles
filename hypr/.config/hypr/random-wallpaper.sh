@@ -6,6 +6,12 @@ INTERVAL=1800  # 30 minutes
 until awww query &>/dev/null; do sleep 0.5; done
 
 while true; do
+    if [ ! -d "$WALLDIR" ] || [ -z "$(ls -A "$WALLDIR" 2>/dev/null)" ]; then
+        echo "random-wallpaper: $WALLDIR is missing or empty, waiting..." >&2
+        sleep "$INTERVAL"
+        continue
+    fi
+
     WALL=$(find "$WALLDIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" \) | shuf -n 1)
 
     if [ -n "$WALL" ]; then

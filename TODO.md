@@ -1,5 +1,9 @@
 # TODO
 
+## README
+
+- [ ] **Screenshots** — add desktop preview to README; at minimum one full-desktop shot showing the waybar, active workspace, and floating window; a second showing the lock screen would be a bonus
+
 ## CLI / shell tool upgrades
 
 - [ ] **bat** — syntax-highlighted `cat` replacement

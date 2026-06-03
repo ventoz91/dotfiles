@@ -18,4 +18,4 @@ import json, sys
 print(json.dumps({'text': sys.argv[1], 'tooltip': sys.argv[2]}))
 " "$weather" "${tooltip:-$weather}")
 
-echo "$result" | tee "$CACHE"
+[[ -n "$result" ]] && echo "$result" | tee "$CACHE"
