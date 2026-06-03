@@ -44,7 +44,7 @@ chsh -s /bin/zsh
 ```bash
 git clone https://github.com/ventoz91/dotfiles ~/dotfiles
 cd ~/dotfiles
-stow hypr waybar rofi kitty nvim dunst wlogout scripts fastfetch zsh ohmyposh
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper bin
 ```
 
 To remove a package's symlinks:
@@ -153,7 +153,8 @@ dotfiles/
 │       ├── style.css
 │       ├── sysinfo.sh      # CPU/RAM stats for waybar module
 │       ├── updates.sh      # Pending pacman/AUR update count
-│       ├── weather.sh      # Current weather via wttr.in
+│       ├── weather.sh      # Current weather via wttr.in (cached)
+│       ├── nightmode.sh    # ☀/☾ indicator; reads hyprsunset process state
 │       └── startup.sh      # Kill + restart both bar instances
 ├── kitty/              # Terminal emulator
 │   └── .config/kitty/kitty.conf
@@ -173,8 +174,10 @@ dotfiles/
 │   └── .config/scripts/
 │       ├── screenshot.sh       # Region / fullscreen / window screenshot picker
 │       ├── scratchpad.sh       # Spawn/toggle scratchpad kitty terminal
-│       ├── discord-bot.sh      # Launch Discord bot in kitty on ws5
-│       └── osd.sh              # Dunst progress-bar OSD for volume/brightness
+│       ├── osd.sh              # Dunst progress-bar OSD for volume/brightness
+│       ├── nightmode-toggle.sh # Toggle hyprsunset + signal waybar
+│       ├── update-manager.sh   # Interactive update panel (kitty float)
+│       └── discord-bot.sh      # Launch Discord bot in kitty on ws5
 └── fastfetch/          # System info display
     └── .config/fastfetch/config.jsonc
 ```

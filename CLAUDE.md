@@ -84,13 +84,13 @@ Key keybinds (`$mainMod` = Super):
 - `style.css` — pill backgrounds (`border-radius: 20px`) for all modules; active workspace cyan solid; `habits-all` green / `habits-partial` white / `habits-none` red / `habits-no-note` dimmed; files hover cyan; power button red on hover; `#window` pill hides when empty
 - `sysinfo.sh` — outputs JSON for `custom/sysinfo` (CPU%, RAM)
 - `updates.sh` — outputs pending pacman + AUR update count
-- `weather.sh` — outputs current weather via wttr.in
+- `weather.sh` — outputs current weather via wttr.in; caches last good result to `~/.cache/waybar-weather.json` so failed polls silently return stale data instead of a blank widget
 - `startup.sh` — kills all waybar instances and relaunches both (`config.jsonc` + `config-secondary.jsonc`) in background; bound to `Super+Shift+B`
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
 
 Custom modules defined inline in `config.jsonc`:
 - `custom/files` — "Files" button, click opens Dolphin
-- `custom/habits` — polls `dn waybar` every 5 min; shows habit completion from today's note (falls back to yesterday with `(yday)` marker if no note yet); `WAYBAR_HABITS` in `daily.py` controls which habits appear in bar text vs ratio view
+- `custom/habits` — polls `dn waybar` every 5 min; shows habit completion from today's note (falls back to yesterday with `(yday)` marker if no note yet); `WAYBAR_HABITS` in `daily.py` lists habits to show individually in bar text as `Name █/░` blocks followed by overall ratio (e.g. `Fitness ░  Programming █  3/4`); empty list shows ratio only
 
 ### Waypaper (`waypaper/`)
 - `config.ini` — wallpaper picker config; backend set to `awww`, grow transition at 1.5s/60fps; bound to `Super+W`
