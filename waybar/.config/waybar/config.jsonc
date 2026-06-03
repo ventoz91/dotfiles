@@ -166,7 +166,11 @@
         "interval": 300,
         "return-type": "json",
         "format": "{}",
-        "tooltip": true
+        "tooltip": true,
+        "signal": 8,
+        "on-click": "xdg-open \"obsidian://open?vault=Notes&file=Ventoz%2FDaily%20Notes%2F$(date +%Y-%m-%d)\"",
+        "on-click-middle": "kitty -e sh -c \"dn check; pkill -SIGRTMIN+8 waybar\"",
+        "on-click-right": "HABIT=$(dn list-habits | rofi -dmenu -p 'toggle habit') && [ -n \"$HABIT\" ] && dn done \"$HABIT\" && pkill -SIGRTMIN+8 waybar"
     },
     "custom/weather": {
         "exec": "~/.config/waybar/weather.sh",
