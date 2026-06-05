@@ -1,9 +1,9 @@
 #!/bin/bash
 mkdir -p ~/Pictures/Screenshots
 
-CHOICE=$(printf "  Region\n  Fullscreen\n  Active Window" | \
+CHOICE=$(printf "  Region\n  Region (timer)\n  Fullscreen\n  Active Window" | \
     rofi -dmenu -p "Screenshot" -i \
-    -theme-str 'listview { lines: 3; } window { width: 280px; }')
+    -theme-str 'listview { lines: 4; } window { width: 300px; }')
 
 [[ -z "$CHOICE" ]] && exit 0
 
@@ -12,6 +12,17 @@ sleep 0.2
 FILE="$HOME/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png"
 
 case "$CHOICE" in
+    *Region\ \(timer\)*)
+        DELAY=$(printf "5\n3\n10\n15" | \
+            rofi -dmenu -p "Delay (s):" \
+            -theme-str 'listview { lines: 4; } window { width: 200px; }')
+        [[ -z "$DELAY" ]] && exit 0
+        [[ ! "$DELAY" =~ ^[0-9]+$ ]] && exit 0
+        notify-send "Screenshot" "Region select in ${DELAY}s..." -t $(( DELAY * 1000 ))
+        sleep "$DELAY"
+        REGION=$(slurp -d) || exit 0
+        grim -g "$REGION" - | tee "$FILE" | wl-copy
+        ;;
     *Region*)
         REGION=$(slurp -d) || exit 0
         grim -g "$REGION" - | tee "$FILE" | wl-copy
