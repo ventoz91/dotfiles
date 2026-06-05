@@ -114,6 +114,7 @@ mtools
 nano
 nano-syntax-highlighting
 neovim
+net-snmp
 netctl
 network-manager-applet
 networkmanager
@@ -121,6 +122,7 @@ networkmanager-openconnect
 networkmanager-openvpn
 nfs-utils
 nilfs-utils
+nmap
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -176,6 +178,7 @@ syncthing
 sysfsutils
 systemd-sysvcompat
 texinfo
+tftp-hpa
 tldr
 ttf-bitstream-vera
 ttf-dejavu
