@@ -86,6 +86,10 @@
         }
     },
     "clock": {
+        // Workaround: libstdc++ tzdb misparses tzdata 2026c's America/Edmonton
+        // (drops the fixed 1h save, shows MST). Alberta is permanently UTC-6
+        // from 2026, so a fixed-offset zone is safe. Remove once gcc is fixed.
+        "timezone": "Etc/GMT+6",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%a %d  %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
