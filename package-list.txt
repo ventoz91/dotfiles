@@ -1,4 +1,5 @@
 7zip
+ark
 atkmm-2.36-docs
 awww
 base
@@ -42,6 +43,7 @@ linux-firmware
 nano
 neovim
 network-manager-applet
+numlockx
 openssh
 otf-aurulent-nerd
 otf-codenewroman-nerd
@@ -131,6 +133,7 @@ ttf-ubuntu-mono-nerd
 ttf-ubuntu-nerd
 ttf-victor-mono-nerd
 ttf-zed-mono-nerd
+unrar
 unzip
 uwsm
 vim
