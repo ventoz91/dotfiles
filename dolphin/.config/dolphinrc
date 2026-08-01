@@ -1,8 +1,11 @@
+[CompactMode]
+PreviewSize=16
+
 [General]
-Version=202
-ShowHiddenFiles=true
-RememberOpenedTabs=false
 HomeUrl=file:///home/trevor
+RememberOpenedTabs=false
+ShowHiddenFiles=true
+Version=202
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
@@ -13,3 +16,6 @@ MenuBar=Disabled
 
 [PreviewSettings]
 Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,opendocumentthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
+
+[Search]
+Location=Everywhere
