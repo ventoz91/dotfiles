@@ -25,14 +25,14 @@
 		"tooltip": false
 	},
 
-	//Sysinfo w/ hover — click to open btop
+	//Sysinfo w/ hover — click to open htop
 	"custom/sysinfo": {
   		"exec": "~/.config/waybar/sysinfo.sh",
   		"interval": 2,
   		"return-type": "json",
   		"format": "{}",
   		"tooltip": true,
-  		"on-click": "kitty -e btop"
+  		"on-click": "kitty -e htop"
 	},
 
 	// System Tray

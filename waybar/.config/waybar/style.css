@@ -1,5 +1,5 @@
 * {
-    font-family: 'JetBrainsMono Nerd Font Propo', sans-serif;
+    font-family: 'JetBrainsMono Nerd Font Propo', 'Symbols Nerd Font Mono', sans-serif;
     font-size: 14px;
     font-weight: bold;
 }
@@ -35,15 +35,11 @@ button {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
-#mpd,
-#mpris,
 #workspaces,
 #custom-sysinfo,
 #custom-appmenu,
 #custom-files,
-#custom-habits,
 #custom-updates,
-#custom-weather,
 #custom-nightmode,
 #custom-power {
     background-color: rgba(20, 20, 20, 0.55);
@@ -112,9 +108,23 @@ button {
     color: #f53c3c;
 }
 
-#mpd.disconnected,
-#mpd.stopped {
-    color: #90b1b1;
+@keyframes battery-blink {
+    to {
+        color: #ffffff;
+    }
+}
+
+#battery.warning:not(.charging) {
+    color: #f9e2af;
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: battery-blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #custom-updates.urgent {
@@ -131,27 +141,6 @@ button {
 #custom-files:hover {
     color: #33ccff;
     background-color: rgba(51, 204, 255, 0.15);
-}
-
-/* Habits widget states */
-#custom-habits.habits-all {
-    color: #00ff99;
-}
-
-#custom-habits.habits-partial {
-    color: #ffffff;
-}
-
-#custom-habits.habits-none {
-    color: #f53c3c;
-}
-
-#custom-habits.habits-no-note {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-#custom-habits.habits-no-checkin {
-    color: #f9e2af;
 }
 
 /* Night mode */

@@ -6,13 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Arch Linux dotfiles managed with GNU Stow. Each top-level directory is a stow package whose internal path mirrors `~/.config/` so that `stow <package>` symlinks it into `$HOME`.
 
+This is the `laptop` branch: a single-panel, dual-monitor-free variant of the desktop `main` branch. Homelab tooling (`crandle`), the daily-notes CLI (`bin/`, `dn`), the Discord bot launcher, and the YouTube-grab script were dropped as personal/desktop-only integrations. Battery and backlight waybar modules were added since this machine has neither on the desktop.
+
 `zsh/` and `ohmyposh/` are exceptions — they link into `$HOME` directly (not `~/.config/`).
 
 ## Deployment
 
 ```bash
 # From ~/dotfiles, symlink a package into $HOME
-stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper bin crandle
+stow hypr waybar kitty rofi nvim dunst wlogout scripts fastfetch zsh ohmyposh dolphin waypaper
 
 # Remove symlinks
 stow -D hypr
@@ -25,7 +27,6 @@ Each package follows the pattern `<package>/.config/<package>/...` → `~/.confi
 Exceptions:
 - `zsh/` maps `.zshrc` → `~/.zshrc`
 - `ohmyposh/` maps `.config/ohmyposh/` → `~/.config/ohmyposh/`
-- `bin/` maps `.local/bin/` → `~/.local/bin/` (user executables)
 
 The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in Hyprland keybinds and waybar modules.
 
@@ -43,7 +44,7 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 - Plugins (installed via pacman): `zsh-autosuggestions`, `zsh-syntax-highlighting`, `fzf`, `zoxide`
 - fzf loaded via `/usr/share/fzf/key-bindings.zsh` + `completion.zsh`; themed via `FZF_DEFAULT_OPTS`; binds `Ctrl+R` (history), `Ctrl+T` (file), `Alt+C` (cd)
 - zoxide init via `zoxide init zsh --cmd cd`; replaces `cd` with frecency-based jumping
-- Default shell set via `chsh -s /bin/zsh`
+- Default shell set via `chsh -s /usr/bin/zsh`
 
 ### Oh My Posh (`ohmyposh/`)
 - `config.toml` — two-line prompt: full path (dim) + git branch/status (green/orange/red), dim clock rprompt, cyan `❯` that turns red on non-zero exit
@@ -51,9 +52,8 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 
 ### Hyprland (`hypr/`)
 - `hyprland.conf` — main config; sources `conf/monitors.conf` for display layout
-- `conf/monitors.conf` — dual monitor: DP-1 (3440×1440@100, primary ultrawide) + HDMI-A-1 (1920×1080@60, right of primary)
+- `conf/monitors.conf` — single laptop panel: eDP-1 (1920×1080@60, scale 1.5)
 - `random-wallpaper.sh` — daemon loop: picks a random image from `~/Pictures/wallpaper/`, applies it via `awww img` with a grow transition, then sleeps 30 minutes and repeats; waits for `awww-daemon` on startup
-- `startup-apps.sh` — staggered workspace layout on login: disables `follow_mouse`, switches to each workspace and launches its app, re-enables `follow_mouse` after all windows appear. Order: Firefox ws1 → Firefox ws2 → kitty bot ws5 → Discord ws3 (last, slowest)
 - `hypridle.conf` — locks session after 900s idle via `loginctl lock-session`
 - `hyprlock.conf` — lock screen config
 
@@ -71,27 +71,26 @@ Key keybinds (`$mainMod` = Super):
 - `C` → hyprpicker (screen color → clipboard)
 - `CTRL+N` → dunstctl history-pop (re-show last notification)
 - `grave` → scratchpad terminal (spawn-on-demand kitty)
-- `N` → rofi quick-capture prompt → `dn note "<text>"` (appends to today's daily note)
-- `Y` → `yt.sh` (YouTube → mpv floating window)
 - `XF86Audio*` / `XF86Brightness*` → `osd.sh` (dunst progress bar OSD)
 
 ### Kitty (`kitty/`)
 - `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor with `cursor_trail 1`, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
-- `config.jsonc` — primary bar pinned to `DP-1`; height 34, font 14px; includes `modules.json`; clock `Mon 29  14:32`; pulseaudio scroll-wheel volume; left: `appmenu`, `files`, `tray`, `sysinfo`, `habits`; right: `mpd`, `mpris`, `pulseaudio`, `network`, `updates`, `weather`, `clock`, `power`
-- `config-secondary.jsonc` — minimal bar pinned to `HDMI-A-1`; left: `appmenu`, `files`; center: `hyprland/workspaces`, `hyprland/window`; includes `modules.json` for shared definitions
-- `modules.json` — defines `hyprland/workspaces` (numbered, all outputs), `hyprland/window` (active title, rewrites Firefox/kitty titles, hides when empty), `custom/appmenu` (click → rofi drun), `custom/sysinfo` (click → btop), `custom/updates`, `tray`
-- `style.css` — pill backgrounds (`border-radius: 20px`) for all modules; active workspace cyan solid; `habits-all` green / `habits-partial` white / `habits-none` red / `habits-no-note` dimmed; files hover cyan; power button red on hover; `#window` pill hides when empty
+- `config.jsonc` — single bar pinned to `eDP-1`; height 34, font 14px; includes `modules.json`; clock `Mon 29  14:32`; pulseaudio scroll-wheel volume; left: `appmenu`, `files`, `tray`, `sysinfo`; center: `hyprland/workspaces`, `hyprland/window`; right: `nightmode`, `backlight`, `pulseaudio`, `network`, `updates`, `battery`, `clock`, `power`
+- `modules.json` — defines `hyprland/workspaces` (numbered, all outputs), `hyprland/window` (active title, rewrites Firefox/kitty titles, hides when empty), `custom/appmenu` (click → rofi drun), `custom/sysinfo` (click → htop), `custom/updates`, `tray`
+- `style.css` — pill backgrounds (`border-radius: 20px`) for all modules; active workspace cyan solid; battery blinks red under 10%, amber under 20%; files hover cyan; power button red on hover; `#window` pill hides when empty
 - `sysinfo.sh` — outputs JSON for `custom/sysinfo` (CPU%, RAM)
 - `updates.sh` — outputs pending pacman + AUR update count
-- `weather.sh` — outputs current weather via wttr.in; caches last good result to `~/.cache/waybar-weather.json` so failed polls silently return stale data instead of a blank widget
-- `startup.sh` — kills all waybar instances and relaunches both (`config.jsonc` + `config-secondary.jsonc`) in background; bound to `Super+Shift+B`
-- `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
+- `startup.sh` — kills all waybar instances and relaunches (`config.jsonc`) in background; bound to `Super+Shift+B`
 
 Custom modules defined inline in `config.jsonc`:
 - `custom/files` — "Files" button, click opens Dolphin
-- `custom/habits` — polls `dn waybar` every 5 min; shows habit completion from today's note (falls back to yesterday with `(yday)` marker if no note yet); `WAYBAR_HABITS` in `daily.py` lists habits to show individually in bar text as `Name █/░` blocks followed by overall ratio (e.g. `Fitness ░  Programming █  3/4`); empty list shows ratio only
+- `custom/nightmode` — ☀/☾ indicator reading `hyprsunset` process state; `Super+Shift+N` toggles
+
+Built-in `battery`/`backlight` modules (added for this machine, absent on the desktop):
+- `battery` — icon + percentage, warning under 20%, blinking critical under 10%
+- `backlight` — `intel_backlight` device, scroll to adjust via `brightnessctl`
 
 ### Waypaper (`waypaper/`)
 - `config.ini` — wallpaper picker config; backend set to `awww`; bound to `Super+W` (note: transition settings like grow/1.5s/60fps are configured in `random-wallpaper.sh`, not here — the `swww_transition_*` keys in config.ini are unused legacy from a prior swww setup)
@@ -116,13 +115,10 @@ Custom modules defined inline in `config.jsonc`:
 - Requires: `yay -S wlogout`
 
 ### Scripts (`scripts/`)
-- `screenshot.sh` — rofi picker for region / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail
+- `screenshot.sh` — rofi picker for region / timed region / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail
 - `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
 - `osd.sh` — dunst progress-bar OSD for volume (`up`/`down`/`mute`) and brightness (`up`/`down`); called by Hyprland XF86 keybinds; uses `x-dunst-stack-tag:osd` so notifications stack rather than spam
-- `discord-bot.sh` — launched by startup-apps.sh on ws5; cd into Discord_Bot project and runs `run.sh`
-- `yt.sh` — open a YouTube URL in a floating mpv window; priority: Firefox address bar (via `ydotool` key injection) → clipboard → rofi prompt (pre-filled if clipboard looks like a URL); bound to `Super+Y`
-
-Note: `~/Documents/Projects/Daily/scripts/rofi-note.sh` is part of the Daily project (not stowed), but is triggered by a Hyprland keybind (`Super+N`). It opens a minimal rofi dmenu prompt, passes the result to `dn note`, and fires a dunst confirmation notification.
+- `update-manager.sh` — interactive terminal UI for previewing/applying pacman+AUR updates and cleanup, launched from the waybar updates module
 
 ### Fastfetch (`fastfetch/`)
 - `config.jsonc` — system info display with custom PNG logo (`mt.png`); uses chafa for image rendering in terminal
@@ -138,15 +134,9 @@ pacman -S --needed - < package-list.txt
 yay -S --needed - < aur-package-list.txt
 ```
 
-### Crandle (`crandle/`)
-- Systemd user units for the homelab inventory scanner (`~/Documents/Projects/crandle`)
-- `crandle.service` — runs `inventory.py --master` via the project venv; writes/overwrites `~/Documents/Notes/Ventoz/Reference/HardwareSurvey.md` and saves a timestamped archive alongside it
-- `crandle.timer` — fires every Sunday at 02:00; `Persistent=true` catches missed runs on next boot
-- Requires a Proxmox API token set in `~/Documents/Projects/crandle/inventory.yml` (`token_id` / `token_secret`) for non-interactive auth; SSH hosts use key auth
-
 ## Runtime dependencies
 
-Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `awww`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`.
+Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `awww`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`, `htop`.
 
 Shell tools (pacman):
 ```bash
@@ -160,5 +150,5 @@ sudo pacman -S plasma-integration breeze
 
 Extra packages (AUR):
 ```bash
-yay -S wlogout hyprsunset oh-my-posh
+yay -S wlogout waypaper oh-my-posh-bin
 ```

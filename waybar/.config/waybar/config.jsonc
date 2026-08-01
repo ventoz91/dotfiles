@@ -1,6 +1,6 @@
 // -*- mode: jsonc -*-
 {
-    "output": "DP-1",
+    "output": "eDP-1",
     "include": "~/.config/waybar/modules.json",
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
@@ -11,79 +11,45 @@
     "modules-left": [
         "custom/appmenu",
         "custom/files",
-	"tray",
-	"custom/sysinfo",
-        "custom/habits"
+        "tray",
+        "custom/sysinfo"
     ],
     "modules-center": [
-	"hyprland/workspaces",
-	"hyprland/window"
+        "hyprland/workspaces",
+        "hyprland/window"
     ],
     "modules-right": [
-        "mpd",
-        "mpris",
-//        "idle_inhibitor",
         "custom/nightmode",
+        "backlight",
         "pulseaudio",
-//        "network",
-//        "power-profiles-daemon",
-//        "cpu",
-//	  "memory",
-//        "temperature",
-//        "backlight",
-//        "keyboard-state",
-//     	  "hyprland/language",
-//        "battery",
-//        "battery#bat2",
-	"network",
-	"custom/updates",
-        "custom/weather",
+        "network",
+        "custom/updates",
+        "battery",
         "clock",
         "custom/power"
     ],
 
     // Modules
 
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
+    "battery": {
+        "interval": 30,
+        "states": {
+            "warning": 20,
+            "critical": 10
         },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
+        "format": "{icon} {capacity}%",
+        "format-charging": "⚡ {capacity}%",
+        "format-plugged": "⚡ {capacity}%",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}"
     },
-    "mpris": {
-        "format": "{player_icon} {title}",
-        "format-paused": "{status_icon} {title}",
-        "max-length": 20,
-        "player-icons": {
-            "default": "▶",
-            "firefox": "󰈹",
-            "librewolf": "󰈹"
-        },
-        "status-icons": {
-            "playing": "▶",
-            "paused": "⏸",
-            "stopped": "⏹"
-        }
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl -e4 -n2 set 5%+",
+        "on-scroll-down": "brightnessctl -e4 -n2 set 5%-",
+        "tooltip-format": "Brightness: {percent}%"
     },
     "clock": {
         // Workaround: libstdc++ tzdb misparses tzdata 2026c's America/Edmonton
@@ -93,32 +59,6 @@
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%a %d  %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": "{}% "
-    },
-    "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
-    "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-      }
     },
     "network": {
         "format-wifi": "",
@@ -133,9 +73,9 @@
     "pulseaudio": {
         "scroll-step": 5,
         "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "🔇 {icon} {format_source}",
+        "format-muted": "🔇 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
@@ -149,40 +89,10 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
     "custom/files": {
         "format": "Files",
         "tooltip": false,
         "on-click": "dolphin"
-    },
-    "custom/habits": {
-        "exec": "$HOME/Documents/Projects/Daily/venv/bin/python $HOME/Documents/Projects/Daily/daily.py waybar",
-        "interval": 300,
-        "return-type": "json",
-        "format": "{}",
-        "tooltip": true,
-        "signal": 8,
-        "on-click": "xdg-open \"obsidian://open?vault=Notes&file=Ventoz%2FDaily%20Notes%2F$(date +%Y-%m-%d)\"",
-        "on-click-middle": "kitty -e bash -c \"$HOME/.local/bin/dn check; pkill -SIGRTMIN+8 waybar\"",
-        "on-click-right": "HABIT=$($HOME/.local/bin/dn list-habits | rofi -dmenu -p 'toggle habit') && [ -n \"$HABIT\" ] && $HOME/.local/bin/dn done \"$HABIT\" && pkill -SIGRTMIN+8 waybar"
-    },
-    "custom/weather": {
-        "exec": "~/.config/waybar/weather.sh",
-        "interval": 1800,
-        "return-type": "json",
-        "format": "{}",
-        "tooltip": true
     },
     "custom/nightmode": {
         "exec": "~/.config/waybar/nightmode.sh",

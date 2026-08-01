@@ -1,4 +1,6 @@
-oh-my-posh
-sddm-silent-theme
+oh-my-posh-bin
+paru
+pcal
 waypaper
 wlogout
+yay
