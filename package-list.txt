@@ -95,6 +95,7 @@ jq
 jre25-openjdk
 kitty
 less
+libayatana-appindicator
 libdvdcss
 libgsf
 libopenraw
@@ -135,6 +136,7 @@ ntp
 numlockx
 nvtop
 obsidian
+openbsd-netcat
 openssh
 os-prober
 otf-font-awesome
@@ -182,6 +184,7 @@ swayimg
 syncthing
 sysfsutils
 systemd-sysvcompat
+tcpdump
 texinfo
 tftp-hpa
 tldr
@@ -203,6 +206,7 @@ which
 whois
 wine
 winetricks
+wireguard-tools
 wireless-regdb
 wireplumber
 xdg-desktop-portal-hyprland
