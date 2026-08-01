@@ -128,7 +128,8 @@
         "tooltip-format-wifi": "{essid}\n{ipaddr}/{cidr}\n{signalStrength}% signal",
         "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "nm-connection-editor"
+        "on-click": "nm-connection-editor",
+        "on-click-right": "~/.config/waybar/vpn-toggle.sh"
     },
     "pulseaudio": {
         "scroll-step": 5,
