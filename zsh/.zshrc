@@ -25,6 +25,8 @@ alias grep='grep --color=auto'
 alias vi='nvim'
 alias vim='nvim'
 alias dn='~/Documents/Projects/Daily/venv/bin/python ~/Documents/Projects/Daily/daily.py'
+alias focus='~/Documents/Projects/focus-timer/venv/bin/python ~/Documents/Projects/focus-timer/focus.py'
+alias syncwiki='bash ~/Documents/Notes/sync-wiki.sh'
 
 # fzf — fuzzy finder (Ctrl+R history, Ctrl+T file search, Alt+C cd)
 source /usr/share/fzf/key-bindings.zsh
@@ -37,3 +39,4 @@ eval "$(zoxide init zsh --cmd cd)"
 fastfetch
 
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+export PATH="$HOME/.config/emacs/bin:$PATH"
