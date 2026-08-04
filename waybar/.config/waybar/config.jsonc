@@ -13,7 +13,8 @@
         "custom/files",
 	"tray",
 	"custom/sysinfo",
-        "custom/habits"
+        "custom/habits",
+        "custom/focus"
     ],
     "modules-center": [
 	"hyprland/workspaces",
@@ -177,6 +178,14 @@
         "on-click": "xdg-open \"obsidian://open?vault=Notes&file=Ventoz%2FDaily%20Notes%2F$(date +%Y-%m-%d)\"",
         "on-click-middle": "kitty -e bash -c \"$HOME/.local/bin/dn check; pkill -SIGRTMIN+8 waybar\"",
         "on-click-right": "HABIT=$($HOME/.local/bin/dn list-habits | rofi -dmenu -p 'toggle habit') && [ -n \"$HABIT\" ] && $HOME/.local/bin/dn done \"$HABIT\" && pkill -SIGRTMIN+8 waybar"
+    },
+    "custom/focus": {
+        "exec": "$HOME/Documents/Projects/Daily/venv/bin/python $HOME/Documents/Projects/Daily/daily.py waybar-focus",
+        "interval": 1,
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "~/.config/scripts/focus-toggle.sh"
     },
     "custom/weather": {
         "exec": "~/.config/waybar/weather.sh",

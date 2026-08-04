@@ -154,6 +154,43 @@ button {
     color: #f9e2af;
 }
 
+#custom-habits.habits-error {
+    color: #f53c3c;
+    font-style: italic;
+}
+
+/* Focus timer widget states */
+#custom-focus {
+    background-color: rgba(20, 20, 20, 0.55);
+    border-radius: 20px;
+    padding: 0 12px;
+    margin: 4px 3px;
+}
+
+#custom-focus.focus-idle {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+}
+
+#custom-focus.focus-active {
+    color: #33ccff;
+}
+
+#custom-focus.focus-break {
+    color: #a6e3a1;
+}
+
+#custom-focus.focus-done {
+    color: #f9e2af;
+}
+
+#custom-focus.focus-error {
+    color: #f53c3c;
+    font-style: italic;
+}
+
 /* Night mode */
 #custom-nightmode.night-on {
     color: #fab387;
