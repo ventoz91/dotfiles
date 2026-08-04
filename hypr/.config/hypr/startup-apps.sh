@@ -13,11 +13,6 @@ hyprctl dispatch workspace 2
 hyprctl dispatch exec "firefox --new-window"
 sleep 1
 
-# ws5 (HDMI-A-1): Discord bot terminal
-#hyprctl dispatch workspace 5
-#hyprctl dispatch exec "kitty -e $HOME/.config/scripts/discord-bot.sh"
-#sleep 1
-
 # ws3 (HDMI-A-1): Discord last — it's the slowest to start
 hyprctl dispatch workspace 3
 hyprctl dispatch exec discord
