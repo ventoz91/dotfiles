@@ -84,7 +84,9 @@
             "playing": "▶",
             "paused": "⏸",
             "stopped": "⏹"
-        }
+        },
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop"
     },
     "clock": {
         // Workaround: libstdc++ tzdb misparses tzdata 2026c's America/Edmonton
