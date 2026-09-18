@@ -6,41 +6,21 @@
 
 ## CLI / shell tool upgrades
 
-- [ ] **bat** — syntax-highlighted `cat` replacement
-  - Line numbers, git diff markers, colour for every config/code file you print
-  - Add alias to `.zshrc`: `alias cat='bat'`
-  - Install: `yay -S bat`
+- [x] **bat** — syntax-highlighted `cat` replacement; `alias cat='bat'` in `.zshrc`
 
-- [ ] **fd** — modern `find`, boosts fzf's Ctrl+T
-  - Respects `.gitignore`, dramatically faster than `find`
-  - Add to `.zshrc`: `export FZF_DEFAULT_COMMAND='fd --type f'` and `export FZF_CTRL_T_COMMAND='fd --type f'`
-  - Install: `yay -S fd`
+- [x] **fd** — modern `find`; `FZF_DEFAULT_COMMAND`/`FZF_CTRL_T_COMMAND` wired in `.zshrc`
 
-- [ ] **yazi** — TUI file manager with image preview
-  - Vim-style nav, kitty image protocol support, fzf integration
-  - Complements Dolphin for terminal-first workflows
-  - Install: `yay -S yazi`
+- [x] **yazi** — TUI file manager; `y()` wrapper in `.zshrc` cds to wherever you were browsing on quit
 
-- [ ] **eza** — modern `ls` replacement
-  - Icons, colors, and a git-status column out of the box
-  - Replace the `ls`/`ll` aliases in `.zshrc`:
-    `alias ls='eza --icons --group-directories-first'`,
-    `alias ll='eza -lah --icons --git --group-directories-first'`
-  - Install: `yay -S eza`
+- [x] **eza** — modern `ls` replacement; `ls`/`ll` aliases updated in `.zshrc`
 
 - [x] **zoxide** — `eval "$(zoxide init zsh --cmd cd)"` in `.zshrc`; replaces `cd` with frecency jumping
 
 - [x] **fzf** — `source <(fzf --zsh)` in `.zshrc`; themed to match palette; Ctrl+R, Ctrl+T, Alt+C wired
 
-- [ ] **lazygit** — full-screen git TUI
-  - Stage/commit/branch/rebase visually — ideal for a repo you commit to constantly
-  - Optional alias `lg='lazygit'` in `.zshrc`
-  - Install: `yay -S lazygit`
+- [x] **lazygit** — full-screen git TUI; `alias lg='lazygit'` in `.zshrc`
 
-- [ ] **btop** — resource monitor
-  - Gorgeous CPU/RAM/net/proc dashboard; replaces htop, matches the dark aesthetic
-  - Pick a theme in-app (TAB → Options) to match the cyan palette
-  - Install: `yay -S btop`
+- [x] **btop** — resource monitor; installed, wired to waybar `custom/sysinfo` click (`kitty -e btop`)
 
 ## Pending upgrades
 

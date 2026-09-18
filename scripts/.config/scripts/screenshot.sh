@@ -1,6 +1,21 @@
 #!/bin/bash
 mkdir -p ~/Pictures/Screenshots
 
+# Freezes the screen (via hyprpicker's frozen render layer) so a slurp
+# selection happening after this point sees a static frame instead of
+# the live desktop — lets hover popups/tooltips survive into the shot.
+PICKER_PID=""
+cleanup() {
+    [[ -n "$PICKER_PID" ]] && kill "$PICKER_PID" 2>/dev/null
+}
+trap cleanup EXIT
+
+freeze() {
+    hyprpicker -r -z -q &
+    PICKER_PID=$!
+    sleep 0.2
+}
+
 CHOICE=$(printf "  Region\n  Region (timer)\n  Fullscreen\n  Active Window" | \
     rofi -dmenu -p "Screenshot" -i \
     -theme-str 'listview { lines: 4; } window { width: 300px; }')
@@ -18,8 +33,9 @@ case "$CHOICE" in
             -theme-str 'listview { lines: 4; } window { width: 200px; }')
         [[ -z "$DELAY" ]] && exit 0
         [[ ! "$DELAY" =~ ^[0-9]+$ ]] && exit 0
-        notify-send "Screenshot" "Region select in ${DELAY}s..." -t $(( DELAY * 1000 ))
+        notify-send "Screenshot" "Freezing frame in ${DELAY}s, then select an area..." -t $(( DELAY * 1000 ))
         sleep "$DELAY"
+        freeze
         REGION=$(slurp -d) || exit 0
         grim -g "$REGION" - | tee "$FILE" | wl-copy
         ;;

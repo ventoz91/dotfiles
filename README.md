@@ -20,7 +20,8 @@ Arch Linux + Hyprland desktop configuration managed with [GNU Stow](https://www.
 | Power Menu         | wlogout                     |
 | Night Mode         | hyprsunset                  |
 | Clipboard Manager  | cliphist                    |
-| Screenshots        | grim + slurp                |
+| Screenshots        | grim + slurp + hyprpicker (freeze) |
+| Screen Recording   | wf-recorder                 |
 | Media Player       | mpv + yt-dlp (YouTube → float) |
 | Text Editor        | Neovim                      |
 | System Info        | Fastfetch                   |
@@ -89,14 +90,15 @@ Without it, `Super+Y` falls back to clipboard or a rofi prompt.
 
 ## External dependencies
 
-Two keybinds depend on paths outside this repo that must exist independently:
+Several keybinds depend on paths outside this repo that must exist independently:
 
 | Keybind     | Depends on                                              |
 |-------------|---------------------------------------------------------|
 | `Super + N` | `~/Documents/Projects/Daily/scripts/rofi-note.sh` (Daily notes project, not stowed) |
-| ws5 startup | `~/Documents/Projects/Discord_Bot/run.sh` (Discord bot project, not stowed) |
+| `Super + T` | `dn focus` from the Daily project (via `focus-toggle.sh`) |
+| `Super + U` | `~/Documents/Projects/ytui` venv (via `ytui-toggle.sh`) |
 
-Both fail silently if the paths don't exist — no crash, just no action.
+Each fails silently if the paths don't exist — no crash, just no action.
 
 ## Monitors
 
@@ -111,16 +113,17 @@ Edit `hypr/.config/hypr/conf/monitors.conf` to match your display layout.
 
 ## Workspace layout
 
-Workspaces 1–5 are persistent and pinned to their monitor. Startup apps are launched with a staggered delay via `startup-apps.sh`.
+Workspaces 1–4 are persistent and pinned to their monitor. Startup apps are launched with a staggered delay via `startup-apps.sh`.
 
 | Workspace | Monitor    | Startup app                    |
 |-----------|------------|--------------------------------|
 | 1         | DP-1       | Firefox                        |
-| 2         | HDMI-A-1   | Firefox                        |
-| 3         | HDMI-A-1   | Discord                        |
+| 2         | HDMI-A-1   | Firefox (new window)           |
+| 3         | HDMI-A-1   | Discord (launched last — slowest to start) |
 | 4         | DP-1       | *(empty)*                      |
-| 5         | HDMI-A-1   | Kitty → `Discord_Bot/run.sh`   |
-| 6–10      | follows window | *(dynamic)*                |
+| 5–10      | follows window | *(dynamic)*                |
+
+Special (hidden) workspaces, toggled on demand rather than pinned: `special:scratch` (terminal), `special:focus` (focus-timer terminal), `special:ytmusic` (YouTube Music), `special:ytui` (ytui TUI).
 
 ## Keybindings
 
@@ -147,13 +150,17 @@ Workspaces 1–5 are persistent and pinned to their monitor. Startup apps are la
 | `Super + L`           | Lock screen (hyprlock)                          |
 | `Super + Shift+E`     | Power menu (wlogout)                            |
 | `Super + Shift+B`     | Restart waybar                                  |
-| `Super + Print`       | Screenshot picker (region / fullscreen / active window) |
+| `Super + Print`       | Screenshot picker (region / region-timer with freeze / fullscreen / active window) |
+| `Super + Shift+Print` or `Super + Shift+P` | Screen recording picker (region / fullscreen); press again to stop |
 | `Super + Shift+V`     | Clipboard history (cliphist + rofi)             |
 | `Super + Shift+N`     | Toggle night mode (hyprsunset 3500K)            |
 | `Super + W`           | Wallpaper picker (waypaper)                     |
 | `Super + C`           | Color picker → clipboard (hyprpicker)           |
 | `Super + Ctrl+N`      | Re-show last notification (dunstctl history-pop)|
 | `Super + N`           | Quick note capture → daily notes (`dn note`)   |
+| `Super + T`           | Toggle focus-timer terminal (`special:focus`)   |
+| `Super + Shift+Y`     | Toggle YouTube Music (`special:ytmusic`)        |
+| `Super + U`           | Toggle ytui TUI (`special:ytui`)                |
 | `Super + \``          | Toggle scratchpad terminal (Kitty)              |
 
 ### Workspaces
@@ -219,12 +226,15 @@ dotfiles/
 │   └── .config/rofi/config.rasi
 ├── scripts/                    # Utility scripts (~/.config/scripts/)
 │   └── .config/scripts/
-│       ├── discord-bot.sh      # Launch Discord bot on ws5
+│       ├── focus-toggle.sh     # Toggle floating dn-focus terminal (special:focus)
 │       ├── nightmode-toggle.sh # Toggle hyprsunset + signal waybar
 │       ├── osd.sh              # Dunst progress-bar OSD for volume/brightness
+│       ├── record.sh           # Region/fullscreen screen recording (wf-recorder)
 │       ├── scratchpad.sh       # Spawn/toggle scratchpad kitty terminal
-│       ├── screenshot.sh       # Region / fullscreen / window screenshot picker
+│       ├── screenshot.sh       # Region (+ freeze-frame timer) / fullscreen / window
 │       ├── update-manager.sh   # Interactive update panel (floating kitty)
+│       ├── ytmusic-toggle.sh   # Toggle YouTube Music (special:ytmusic)
+│       ├── ytui-toggle.sh      # Toggle ytui TUI (special:ytui)
 │       └── yt.sh               # YouTube URL → mpv float (Super+Y)
 ├── waybar/                     # Status bar
 │   └── .config/waybar/
@@ -234,8 +244,9 @@ dotfiles/
 │       ├── style.css           # Pill style, cyan accent, habit colors
 │       ├── nightmode.sh        # ☀/☾ indicator; reads hyprsunset state
 │       ├── startup.sh          # Kill + relaunch both bar instances
-│       ├── sysinfo.sh          # CPU% and RAM for the sysinfo module
+│       ├── sysinfo.sh          # CPU%, RAM, and temp for the sysinfo module
 │       ├── updates.sh          # Pending pacman/AUR update count
+│       ├── vpn-toggle.sh       # Right-click network module: wg-quick@wg0 on/off
 │       └── weather.sh          # Current weather via wttr.in (cached on failure)
 ├── waypaper/                   # Wallpaper picker GUI
 │   └── .config/waypaper/config.ini

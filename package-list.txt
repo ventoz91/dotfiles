@@ -16,6 +16,7 @@ b43-fwcutter
 base
 base-devel
 bash-completion
+bat
 bind
 bluez
 bluez-utils
@@ -25,6 +26,7 @@ btrfs-assistant
 btrfs-progs
 cantarell-fonts
 cliphist
+cmake
 cryptsetup
 device-mapper
 dfu-programmer
@@ -60,8 +62,10 @@ eos-rankmirrors
 ethtool
 ex-vi-compat
 exfatprogs
+eza
 f2fs-tools
 fastfetch
+fd
 firefox
 git
 github-cli
@@ -94,6 +98,7 @@ jfsutils
 jq
 jre25-openjdk
 kitty
+lazygit
 less
 libayatana-appindicator
 libdvdcss
@@ -102,6 +107,7 @@ libopenraw
 linux
 linux-firmware
 linux-headers
+lm_sensors
 logrotate
 lsb-release
 lsscsi
@@ -136,6 +142,7 @@ ntp
 numlockx
 nvtop
 obsidian
+ollama
 openbsd-netcat
 openssh
 os-prober
@@ -143,7 +150,6 @@ otf-font-awesome
 pacman-contrib
 pandoc-cli
 papirus-icon-theme
-paru
 pavucontrol
 perl
 pipewire-alsa
@@ -157,11 +163,13 @@ power-profiles-daemon
 prismlauncher
 protontricks
 prusa-slicer
+psmisc
 python
 python-defusedxml
 python-jinja
 python-packaging
 python-pip
+python-pipx
 qbittorrent
 rebuild-detector
 reflector
@@ -172,11 +180,13 @@ rtkit
 s-nail
 sddm
 sg3_utils
+shellcheck
 slurp
 smartmontools
 snap-pac
 snapper
 sof-firmware
+spirv-headers
 steam
 stow
 sudo
@@ -198,9 +208,12 @@ unzip
 upower
 usb_modeswitch
 usbutils
+vulkan-headers
 vulkan-radeon
+vulkan-tools
 waybar
 welcome
+wf-recorder
 wget
 which
 whois
@@ -209,6 +222,8 @@ winetricks
 wireguard-tools
 wireless-regdb
 wireplumber
+wireshark-cli
+wireshark-qt
 xdg-desktop-portal-hyprland
 xdg-desktop-portal-wlr
 xdg-user-dirs
@@ -217,6 +232,7 @@ xfsprogs
 xl2tpd
 xterm
 yay
+yazi
 ydotool
 yt-dlp
 zip

@@ -53,7 +53,7 @@ The `scripts` package maps to `~/.config/scripts/` and scripts are referenced in
 - `hyprland.conf` — main config; sources `conf/monitors.conf` for display layout
 - `conf/monitors.conf` — dual monitor: DP-1 (3440×1440@100, primary ultrawide) + HDMI-A-1 (1920×1080@60, right of primary)
 - `random-wallpaper.sh` — daemon loop: picks a random image from `~/Pictures/wallpaper/`, applies it via `awww img` with a grow transition, then sleeps 30 minutes and repeats; waits for `awww-daemon` on startup
-- `startup-apps.sh` — staggered workspace layout on login: disables `follow_mouse`, switches to each workspace and launches its app, re-enables `follow_mouse` after all windows appear. Order: Firefox ws1 → Firefox ws2 → kitty bot ws5 → Discord ws3 (last, slowest)
+- `startup-apps.sh` — staggered workspace layout on login: disables `follow_mouse`, switches to each workspace and launches its app, re-enables `follow_mouse` after all windows appear. Order: Firefox ws1 → Firefox ws2 → Discord ws3 (last, slowest)
 - `hypridle.conf` — locks session after 900s idle via `loginctl lock-session`
 - `hyprlock.conf` — lock screen config
 
@@ -71,23 +71,32 @@ Key keybinds (`$mainMod` = Super):
 - `C` → hyprpicker (screen color → clipboard)
 - `CTRL+N` → dunstctl history-pop (re-show last notification)
 - `grave` → scratchpad terminal (spawn-on-demand kitty)
+- `SHIFT+Print` / `SHIFT+P` → `record.sh` (region/fullscreen screen recording via wf-recorder; re-press to stop)
 - `N` → rofi quick-capture prompt → `dn note "<text>"` (appends to today's daily note)
+- `T` → `focus-toggle.sh` (floating focus-timer terminal on `special:focus`, waybar `custom/focus` click does the same)
 - `Y` → `yt.sh` (YouTube → mpv floating window)
+- `SHIFT+Y` → `ytmusic-toggle.sh` (YouTube Music on `special:ytmusic`)
+- `U` → `ytui-toggle.sh` (ytui TUI on `special:ytui`)
+- `M` → `hyprshutdown` if installed, else `hyprctl dispatch exit`
 - `XF86Audio*` / `XF86Brightness*` → `osd.sh` (dunst progress bar OSD)
 
 ### Kitty (`kitty/`)
 - `kitty.conf` — font (JetBrainsMono Nerd Font Propo 13), background opacity 0.85, beam cursor with `cursor_trail 1`, dark colorscheme matching waybar/rofi palette, powerline tab bar
 
 ### Waybar (`waybar/`)
-- `config.jsonc` — primary bar pinned to `DP-1`; height 34, font 14px; includes `modules.json`; clock `Mon 29  14:32`; pulseaudio scroll-wheel volume; left: `appmenu`, `files`, `tray`, `sysinfo`, `habits`; right: `mpd`, `mpris`, `pulseaudio`, `network`, `updates`, `weather`, `clock`, `power`
+- `config.jsonc` — primary bar pinned to `DP-1`; height 34, font 14px; includes `modules.json`; clock `Mon 29  14:32` (timezone pinned to `Etc/GMT+6` as a libstdc++/tzdata workaround, see comment in `config.jsonc`); pulseaudio scroll-wheel volume; left: `appmenu`, `files`, `tray`, `sysinfo`, `habits`, `focus`; right: `mpd`, `mpris`, `nightmode`, `pulseaudio`, `network`, `updates`, `weather`, `clock`, `power`
 - `config-secondary.jsonc` — minimal bar pinned to `HDMI-A-1`; left: `appmenu`, `files`; center: `hyprland/workspaces`, `hyprland/window`; includes `modules.json` for shared definitions
 - `modules.json` — defines `hyprland/workspaces` (numbered, all outputs), `hyprland/window` (active title, rewrites Firefox/kitty titles, hides when empty), `custom/appmenu` (click → rofi drun), `custom/sysinfo` (click → btop), `custom/updates`, `tray`
 - `style.css` — pill backgrounds (`border-radius: 20px`) for all modules; active workspace cyan solid; `habits-all` green / `habits-partial` white / `habits-none` red / `habits-no-note` dimmed; files hover cyan; power button red on hover; `#window` pill hides when empty
-- `sysinfo.sh` — outputs JSON for `custom/sysinfo` (CPU%, RAM)
-- `updates.sh` — outputs pending pacman + AUR update count
+- `sysinfo.sh` — outputs JSON for `custom/sysinfo` (CPU%, RAM, temp via `sensors`)
+- `updates.sh` — outputs pending pacman + AUR update count; click opens `update-manager.sh` in a floating kitty
 - `weather.sh` — outputs current weather via wttr.in; caches last good result to `~/.cache/waybar-weather.json` so failed polls silently return stale data instead of a blank widget
+- `nightmode.sh` — ☀/☾ text for `custom/nightmode`, reflects whether `hyprsunset` is running; refreshed by `nightmode-toggle.sh`'s `SIGRTMIN+9`
+- `vpn-toggle.sh` — right-click menu on the `network` module; connects/disconnects the `wg-quick@wg0` WireGuard tunnel via `pkexec`
 - `startup.sh` — kills all waybar instances and relaunches both (`config.jsonc` + `config-secondary.jsonc`) in background; bound to `Super+Shift+B`
 - `power_menu.xml` — legacy GTK menu (kept for reference; power button now launches wlogout)
+
+Note: `config.jsonc` also defines an inline `custom/media` module (mpris-style now-playing, referencing a `mediaplayer.py` that doesn't exist in this repo) — it's leftover scaffolding, not included in any `modules-*` list, so it never runs.
 
 Custom modules defined inline in `config.jsonc`:
 - `custom/files` — "Files" button, click opens Dolphin
@@ -116,10 +125,15 @@ Custom modules defined inline in `config.jsonc`:
 - Requires: `yay -S wlogout`
 
 ### Scripts (`scripts/`)
-- `screenshot.sh` — rofi picker for region / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail
+- `screenshot.sh` — rofi picker for region / region (timer) / fullscreen / active-window; saves timestamped PNG to `~/Pictures/Screenshots/`, copies to clipboard, fires dunst notification with thumbnail. The timer variant freezes the screen (`hyprpicker -r -z` overlay) once the delay elapses, then opens `slurp` against that static frame — lets hover popups/tooltips survive into the shot even though drawing the selection happens after the delay
 - `scratchpad.sh` — spawns kitty with `--class scratch-term` into `special:scratch` if not running, then toggles the workspace
 - `osd.sh` — dunst progress-bar OSD for volume (`up`/`down`/`mute`) and brightness (`up`/`down`); called by Hyprland XF86 keybinds; uses `x-dunst-stack-tag:osd` so notifications stack rather than spam
-- `discord-bot.sh` — launched by startup-apps.sh on ws5; cd into Discord_Bot project and runs `run.sh`
+- `nightmode-toggle.sh` — starts/kills `hyprsunset -t 3500`, then signals waybar (`SIGRTMIN+9`) to refresh `custom/nightmode`
+- `focus-toggle.sh` — toggles a floating `dn focus` terminal on `special:focus`; only stays open on a non-zero exit (genuine crash), otherwise closes immediately
+- `ytmusic-toggle.sh` — toggles YouTube Music (`com.github.th-ch.youtube-music`) on `special:ytmusic`
+- `ytui-toggle.sh` — toggles the `ytui` TUI (kitty, `--class ytui`) on `special:ytui`
+- `update-manager.sh` — interactive pacman/AUR update TUI (preview, update, cleanup orphans + cache); launched by clicking waybar's `custom/updates`
+- `record.sh` — region/fullscreen screen recording via `wf-recorder`; re-running the script while a recording is active sends `SIGINT` to finalize and stop it; saves to `~/Videos/Recordings/`; bound to `Super+Shift+Print`
 - `yt.sh` — open a YouTube URL in a floating mpv window; priority: Firefox address bar (via `ydotool` key injection) → clipboard → rofi prompt (pre-filled if clipboard looks like a URL); bound to `Super+Y`
 
 Note: `~/Documents/Projects/Daily/scripts/rofi-note.sh` is part of the Daily project (not stowed), but is triggered by a Hyprland keybind (`Super+N`). It opens a minimal rofi dmenu prompt, passes the result to `dn note`, and fires a dunst confirmation notification.
@@ -146,7 +160,7 @@ yay -S --needed - < aur-package-list.txt
 
 ## Runtime dependencies
 
-Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `hyprctl`, `awww`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`.
+Scripts rely on: `grim`, `slurp`, `wl-copy` (wl-clipboard), `wf-recorder` (screen recording), `hyprctl`, `hyprpicker` (color picker + screenshot freeze), `awww`, `playerctl`, `wpctl` (pipewire), `cliphist`, `dunst`, `rofi`, `nm-applet`, `numlockx`, `hypridle`, `hyprlock`, `wlogout`, `hyprsunset`, `oh-my-posh`, `brightnessctl`, `sensors` (lm_sensors, waybar sysinfo temp), `jq` (`yt.sh`), `pkexec`/`wireguard-tools` (waybar VPN toggle), `checkupdates` (pacman-contrib) and `yay` (waybar updates + update-manager.sh).
 
 Shell tools (pacman):
 ```bash
