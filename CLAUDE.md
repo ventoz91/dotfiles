@@ -139,7 +139,7 @@ Custom modules defined inline in `config.jsonc`:
 Note: `~/Documents/Projects/Daily/scripts/rofi-note.sh` is part of the Daily project (not stowed), but is triggered by a Hyprland keybind (`Super+N`). It opens a minimal rofi dmenu prompt, passes the result to `dn note`, and fires a dunst confirmation notification.
 
 ### Fastfetch (`fastfetch/`)
-- `config.jsonc` — system info display with custom PNG logo (`mt.png`); uses chafa for image rendering in terminal
+- `config.jsonc` — system info display with the builtin `arch` ASCII logo (`mt.png` is the old image logo, kept but unused)
 
 ## Package lists
 
