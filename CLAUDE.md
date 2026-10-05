@@ -131,7 +131,7 @@ Custom modules defined inline in `config.jsonc`:
 - `nightmode-toggle.sh` — starts/kills `hyprsunset -t 3500`, then signals waybar (`SIGRTMIN+9`) to refresh `custom/nightmode`
 - `focus-toggle.sh` — toggles a floating `dn focus` terminal on `special:focus`; only stays open on a non-zero exit (genuine crash), otherwise closes immediately
 - `ytmusic-toggle.sh` — toggles YouTube Music (`com.github.th-ch.youtube-music`) on `special:ytmusic`
-- `ytui-toggle.sh` — toggles the `ytui` TUI (kitty, `--class ytui`) on `special:ytui`
+- `ytui-toggle.sh` — toggles the `ytui` TUI (kitty, `--class ytui`) on `special:ytui`; moves any mpv windows ytui launched onto the regular workspace (so hiding ytui doesn't hide the video) and moves ytui back onto `special:ytui` if it has drifted off it
 - `update-manager.sh` — interactive pacman/AUR update TUI (preview, update, cleanup orphans + cache); launched by clicking waybar's `custom/updates`
 - `record.sh` — region/fullscreen screen recording via `wf-recorder`; re-running the script while a recording is active sends `SIGINT` to finalize and stop it; saves to `~/Videos/Recordings/`; bound to `Super+Shift+Print`
 - `yt.sh` — open a YouTube URL in a floating mpv window; priority: Firefox address bar (via `ydotool` key injection) → clipboard → rofi prompt (pre-filled if clipboard looks like a URL); bound to `Super+Y`
