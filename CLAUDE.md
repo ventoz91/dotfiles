@@ -77,7 +77,7 @@ Key keybinds (`$mainMod` = Super):
 - `Y` → `yt.sh` (YouTube → mpv floating window)
 - `SHIFT+Y` → `ytmusic-toggle.sh` (YouTube Music on `special:ytmusic`)
 - `U` → `ytui-toggle.sh` (ytui TUI on `special:ytui`)
-- `M` → `hyprshutdown` if installed, else `hyprctl dispatch exit`
+- `M` → `hyprshutdown` if installed, else `hyprctl dispatch 'hl.dsp.exit()'` (0.57 Lua syntax)
 - `XF86Audio*` / `XF86Brightness*` → `osd.sh` (dunst progress bar OSD)
 
 ### Kitty (`kitty/`)

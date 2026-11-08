@@ -15,7 +15,7 @@ ytui_addr() {
 
 addr=$(ytui_addr)
 if [ -z "$addr" ]; then
-    hyprctl dispatch exec "[workspace $WS silent] kitty --class ytui -d /home/trevor/Documents/Projects/ytui -e .venv/bin/ytui"
+    hyprctl dispatch "hl.dsp.exec_cmd(\"kitty --class ytui -d /home/trevor/Documents/Projects/ytui -e .venv/bin/ytui\", {workspace=\"$WS silent\"})"
     # Wait (up to ~3s) for the window to map instead of a fixed sleep.
     for _ in $(seq 30); do
         addr=$(ytui_addr)
@@ -29,15 +29,15 @@ clients=$(hyprctl clients -j)
 
 # Keep videos out of the scratchpad.
 for mpv in $(jq -r --arg ws "$WS" '.[] | select(.class == "mpv" and .workspace.name == $ws) | .address' <<<"$clients"); do
-    hyprctl dispatch movetoworkspacesilent "$regular_ws,address:$mpv"
+    hyprctl dispatch "hl.dsp.window.move({workspace=$regular_ws, window=\"address:$mpv\", follow=false})"
 done
 
 # Self-heal: put ytui back on its special workspace if it wandered off.
 if [ -n "$addr" ]; then
     ytui_ws=$(jq -r --arg a "$addr" '.[] | select(.address == $a) | .workspace.name' <<<"$clients")
     if [ "$ytui_ws" != "$WS" ]; then
-        hyprctl dispatch movetoworkspacesilent "$WS,address:$addr"
+        hyprctl dispatch "hl.dsp.window.move({workspace=\"$WS\", window=\"address:$addr\", follow=false})"
     fi
 fi
 
-hyprctl dispatch togglespecialworkspace ytui
+hyprctl dispatch 'hl.dsp.workspace.toggle_special("ytui")'

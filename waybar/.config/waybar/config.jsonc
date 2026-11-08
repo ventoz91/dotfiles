@@ -195,6 +195,6 @@
     "custom/power": {
         "format": "⏻ ",
         "tooltip": false,
-        "on-click": "hyprctl dispatch exec wlogout"
+        "on-click": "wlogout"
     }
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 if ! hyprctl clients -j | grep -q '"class": "scratch-term"'; then
-    hyprctl dispatch exec "[workspace special:scratch silent] kitty --class scratch-term"
+    hyprctl dispatch 'hl.dsp.exec_cmd("kitty --class scratch-term", {workspace="special:scratch silent"})'
     sleep 0.3
 fi
-hyprctl dispatch togglespecialworkspace scratch
+hyprctl dispatch 'hl.dsp.workspace.toggle_special("scratch")'
