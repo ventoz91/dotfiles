@@ -4,6 +4,7 @@ alsa-firmware
 alsa-plugins
 alsa-utils
 amd-ucode
+android-tools
 archlinux-xdg-menu
 ark
 arm-none-eabi-gcc
@@ -27,6 +28,7 @@ cantarell-fonts
 cliphist
 cmake
 cryptsetup
+ddrescue
 device-mapper
 dfu-programmer
 dfu-util
@@ -82,7 +84,9 @@ hyprpicker
 hyprpolkitagent
 hyprsunset
 inetutils
+inotify-tools
 inxi
+iperf3
 iptables
 iwd
 jdk-openjdk
@@ -95,6 +99,7 @@ less
 libayatana-appindicator
 libdvdcss
 libopenraw
+libva-utils
 linux
 linux-firmware
 linux-headers
@@ -168,7 +173,6 @@ rtkit
 s-nail
 sddm
 sg3_utils
-shellcheck
 slurp
 smartmontools
 snap-pac
@@ -183,6 +187,7 @@ syncthing
 sysfsutils
 systemd-sysvcompat
 tcpdump
+testdisk
 texinfo
 tftp-hpa
 tldr

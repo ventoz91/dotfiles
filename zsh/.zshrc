@@ -27,7 +27,6 @@ alias vi='nvim'
 alias vim='nvim'
 alias lg='lazygit'
 alias dn='~/Documents/Projects/Daily/venv/bin/python ~/Documents/Projects/Daily/daily.py'
-alias focus='~/Documents/Projects/focus-timer/venv/bin/python ~/Documents/Projects/focus-timer/focus.py'
 alias syncwiki='bash ~/Documents/Notes/sync-wiki.sh'
 
 # yazi — cd to wherever you were browsing when you quit

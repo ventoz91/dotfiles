@@ -2,4 +2,8 @@ oh-my-posh
 pear-desktop-bin
 sddm-silent-theme
 waypaper
+wayvr
+wivrn-dashboard
+wivrn-server
 wlogout
+xone-dkms
